@@ -1,6 +1,5 @@
 import { ApiConstants } from "@/constants/apiConstants";
 import { request } from "./request";
-import { IUserCreate } from "@/interfaces";
 
 export const getTeachers = async () => {
   return request.get(ApiConstants.TEACHERS_LIST).then(({ data }) => data);
@@ -27,8 +26,4 @@ export const getTeacherClassesByYearSemester = async (
       params: { year, semester },
     })
     .then(({ data }) => data);
-};
-
-export const createTeacher = async (data: IUserCreate) => {
-  return request.post(ApiConstants.USER_TEACHER, data).then(({ data }) => data);
 };

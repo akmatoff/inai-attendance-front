@@ -22,8 +22,17 @@ export class ApiConstants {
   static CLASS_TIMES_LIST = this.API_URL.concat("/options/class-times");
   static CLASS_DAYS_LIST = this.API_URL.concat("/options/class-days");
 
+  static ATTENDANCE = this.API_URL.concat("/attendance");
+
   static USER = this.API_URL.concat("/user");
   static USER_TEACHER = this.USER.concat("/teacher");
   static USER_STUDENT = this.USER.concat("/student");
+  static USER_STUDENT_GROUP = this.USER_STUDENT.concat("/group");
   static USER_ADMIN = this.USER.concat("/admin");
+  static USER_ACTIVATE = this.USER.concat("/activate");
+  static USER_DEACTIVATE = this.USER.concat("/deactivate");
+  static USER_PASSWORD = this.USER.concat("/password");
+  static USER_NAME = this.USER.concat("/name");
+
+  static QR_CODE = this.API_URL.concat("/qr");
 }
