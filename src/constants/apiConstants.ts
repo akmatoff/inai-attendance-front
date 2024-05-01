@@ -8,6 +8,11 @@ export class ApiConstants {
   static GROUP_REMOVE_STUDENT = this.GROUP.concat("/remove/student");
   static GROUP_NAME = this.GROUP.concat("/name");
   static SCHEDULE = this.SUBJECT.concat("/schedule");
+  static TEACHER_CLASSES_TODAY = this.SUBJECT.concat("/classes/today");
+  static TEACHER_CLASSES_WEEK = this.SUBJECT.concat("/classes/week");
+  static TEACHER_CLASSES_BY_YEAR_SEMESTER = this.SUBJECT.concat(
+    "/classes-by-year-semester"
+  );
   // Lists
   static SUBJECTS_LIST = this.API_URL.concat("/options/subjects");
   static GROUPS_LIST = this.API_URL.concat("/options/groups");
@@ -16,4 +21,9 @@ export class ApiConstants {
   static ROLES_LIST = this.API_URL.concat("/options/roles");
   static CLASS_TIMES_LIST = this.API_URL.concat("/options/class-times");
   static CLASS_DAYS_LIST = this.API_URL.concat("/options/class-days");
+
+  static USER = this.API_URL.concat("/user");
+  static USER_TEACHER = this.USER.concat("/teacher");
+  static USER_STUDENT = this.USER.concat("/student");
+  static USER_ADMIN = this.USER.concat("/admin");
 }

@@ -1,4 +1,4 @@
-import { ISubjectCreate } from "@/interfaces";
+import { ISchedule, ISubjectCreate } from "@/interfaces";
 import { request } from "./request";
 import { ApiConstants } from "@/constants/apiConstants";
 
@@ -19,4 +19,10 @@ export const updateSubject = async (
     .then(({ data }) => data);
 };
 
-export const createSubjectSchedule = async () => {};
+export const createSubjectSchedule = async (data: ISchedule) => {
+  return request.post(ApiConstants.SCHEDULE, data).then(({ data }) => data);
+};
+
+export const updateSubjectSchedule = async (data: ISchedule) => {
+  return request.put(ApiConstants.SCHEDULE, data).then(({ data }) => data);
+};
