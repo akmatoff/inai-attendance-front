@@ -1,4 +1,4 @@
-import { IResource } from "@/interfaces/resource";
+import { IResource } from "@/interfaces";
 
 export const resources: IResource[] = [
   {

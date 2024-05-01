@@ -1,4 +1,4 @@
-import { ILogin } from "@/interfaces/auth";
+import { ILogin } from "@/interfaces";
 import { request } from "./request";
 import { ApiConstants } from "@/constants/apiConstants";
 

@@ -1,4 +1,4 @@
-import { ILogin } from "@/interfaces/auth";
+import { ILogin } from "@/interfaces";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { Card, CardBody, Input, Button } from "@nextui-org/react";
