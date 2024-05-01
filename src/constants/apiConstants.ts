@@ -4,6 +4,9 @@ export class ApiConstants {
   static LOGIN = this.API_URL.concat("/login");
   static SUBJECT = this.API_URL.concat("/subject");
   static GROUP = this.API_URL.concat("/group");
+  static GROUP_ADD_STUDENT = this.GROUP.concat("/add/student");
+  static GROUP_REMOVE_STUDENT = this.GROUP.concat("/remove/student");
+  static GROUP_NAME = this.GROUP.concat("/name");
   static SCHEDULE = this.SUBJECT.concat("/schedule");
   // Lists
   static SUBJECTS_LIST = this.API_URL.concat("/options/subjects");

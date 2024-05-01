@@ -1,5 +1,5 @@
 import { Outlet, useNavigate } from "react-router";
-import { Navbar, NavbarContent, NavbarItem } from "@nextui-org/react";
+// import { Navbar, NavbarContent, NavbarItem } from "@nextui-org/react";
 import Sidebar from "./Sidebar";
 import { useEffect, useMemo } from "react";
 import { ROUTES } from "@/constants/routes";
@@ -27,7 +27,7 @@ export default function DashboardLayout() {
         <Sidebar />
 
         <div className="flex-[5_1_25%]">
-          <Navbar
+          {/* <Navbar
             position="static"
             className="px-1 justify-between"
             maxWidth="full"
@@ -35,7 +35,7 @@ export default function DashboardLayout() {
             <NavbarContent justify="end">
               <NavbarItem></NavbarItem>
             </NavbarContent>
-          </Navbar>
+          </Navbar> */}
           <Outlet />
         </div>
       </div>
