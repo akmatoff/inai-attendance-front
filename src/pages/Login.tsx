@@ -7,6 +7,7 @@ import { useLogin } from "@/queries/auth";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 import { ROUTES } from "@/constants/routes";
+import Logo from "@/components/Logo";
 
 const loginValidationSchema = Yup.object({
   username: Yup.string()
@@ -46,7 +47,8 @@ export default function Login() {
 
   return (
     <div className="flex flex-col justify-center items-center h-screen">
-      <Card className="w-92 md:w-[360px]">
+      <Logo />
+      <Card className="mt-10 w-92 md:w-[360px]">
         <form onSubmit={loginForm.handleSubmit(onSubmit)}>
           <CardBody className="flex flex-col gap-4">
             <Controller

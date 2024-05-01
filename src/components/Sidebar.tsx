@@ -8,6 +8,7 @@ import {
   ListboxSection,
 } from "@nextui-org/react";
 import { useNavigate } from "react-router";
+import Logo from "./Logo";
 
 export default function Sidebar() {
   const navigate = useNavigate();
@@ -21,9 +22,7 @@ export default function Sidebar() {
     <div className="flex flex-col justify-between flex-[1_1_0%] h-screen border-r-2 border-slate-100">
       <div>
         <div className="p-4 mb-4">
-          <h1 className="text-2xl cursor-pointer">
-            <span className="text-primary font-bold">INAI</span> Attendance
-          </h1>
+          <Logo />
         </div>
 
         <Listbox aria-label="Ресурсы">
