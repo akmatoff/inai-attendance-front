@@ -23,6 +23,8 @@ export const createSubjectSchedule = async (data: ISchedule) => {
   return request.post(ApiConstants.SCHEDULE, data).then(({ data }) => data);
 };
 
-export const updateSubjectSchedule = async (data: ISchedule) => {
-  return request.put(ApiConstants.SCHEDULE, data).then(({ data }) => data);
+export const updateSubjectSchedule = async (id: number, data: ISchedule) => {
+  return request
+    .put(ApiConstants.SCHEDULE, { data, params: { id } })
+    .then(({ data }) => data);
 };
