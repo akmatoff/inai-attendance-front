@@ -16,7 +16,7 @@ const loginValidationSchema = Yup.object({
     .max(32, "Логин должен быть не более 32 символов")
     .required("Это поле обязательное"),
   password: Yup.string()
-    .min(4, "Пароль должен быть не менее 6 символов")
+    .min(4, "Пароль должен быть не менее 4 символов")
     .required("Это поле обязательное"),
 });
 
@@ -34,6 +34,11 @@ export default function Login() {
 
   const { mutate: login, isPending } = useLogin({
     onSuccess: (data) => {
+      if (data.role === "STUDENT") {
+        toast.error("У вас нет доступа к данному ресурсу");
+        return;
+      }
+
       navigate(ROUTES.DASHBOARD);
       localStorage.setItem(StorageKeys.TOKEN, data.token);
       toast.success("Авторизация успешна!");

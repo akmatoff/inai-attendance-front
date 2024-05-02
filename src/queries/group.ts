@@ -1,4 +1,5 @@
 import { ApiConstants } from "@/constants/apiConstants";
+import { MutationQueryParams } from "@/interfaces";
 import {
   addStudentToGroup,
   changeGroupName,
@@ -22,13 +23,18 @@ export const useGroups = () => {
   };
 };
 
-export const useGroupCreation = () => {
+export const useGroupCreation = ({
+  onSuccess,
+  onError,
+}: MutationQueryParams) => {
   const { mutate, isPending } = useMutation({
     mutationFn: (name: string) => createGroup(name),
     onSuccess: () => {
+      onSuccess?.();
       toast.success("Группа создана успешно");
     },
     onError: () => {
+      onError?.();
       toast.error("Произошла ошибка");
     },
   });

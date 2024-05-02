@@ -5,6 +5,7 @@ import { useEffect, useMemo } from "react";
 import { ROUTES } from "@/constants/routes";
 import toast from "react-hot-toast";
 import { StorageKeys } from "@/constants/storageKeys";
+// import { Navbar, NavbarContent, NavbarItem } from "@nextui-org/react";
 
 export default function DashboardLayout() {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ export default function DashboardLayout() {
       <div className="flex w-full min-h-full">
         <Sidebar />
 
-        <div className="flex-[5_1_25%]">
+        <div className="flex-[5_1_25%] overflow-y-scroll">
           {/* <Navbar
             position="static"
             className="px-1 justify-between"
@@ -36,7 +37,10 @@ export default function DashboardLayout() {
               <NavbarItem></NavbarItem>
             </NavbarContent>
           </Navbar> */}
-          <Outlet />
+
+          <div className="flex flex-col justify-center items-center w-full min-h-full p-20">
+            <Outlet />
+          </div>
         </div>
       </div>
     </section>

@@ -1,4 +1,7 @@
-import { resources } from "@/constants/resources";
+import {
+  resourcesListSection,
+  resourcesActionSection,
+} from "@/constants/resources";
 import { ROUTES } from "@/constants/routes";
 import { StorageKeys } from "@/constants/storageKeys";
 import {
@@ -21,18 +24,34 @@ export default function Sidebar() {
   return (
     <div className="flex flex-col justify-between flex-[1_1_0%] h-screen border-r-2 border-slate-100">
       <div>
-        <div className="p-4 mb-4">
+        <div className="p-4 border-b-1">
           <Logo />
         </div>
 
         <Listbox aria-label="Ресурсы">
-          <ListboxSection title="Редактирование" showDivider>
-            {resources.map((resource) => (
+          <ListboxSection title="Cписки" showDivider>
+            {resourcesListSection.map((resource) => (
               <ListboxItem
                 key={resource.key}
                 className="px-6 py-3 mb-2"
                 classNames={{ title: "font-semibold" }}
-                // description="Создание и редактирование"
+                startContent={resource.icon}
+                description={resource.description}
+                onClick={() => navigate(resource.href)}
+              >
+                {resource.label}
+              </ListboxItem>
+            ))}
+          </ListboxSection>
+          <ListboxSection title="Учет">
+            {resourcesActionSection.map((resource) => (
+              <ListboxItem
+                key={resource.key}
+                className="px-6 py-3 mb-2"
+                classNames={{ title: "font-semibold" }}
+                startContent={resource.icon}
+                description={resource.description}
+                onClick={() => navigate(resource.href)}
               >
                 {resource.label}
               </ListboxItem>
@@ -41,11 +60,11 @@ export default function Sidebar() {
         </Listbox>
       </div>
 
-      <div className="p-4">
+      <div className="px-10 py-4">
         <Button
-          color="primary"
+          color="default"
           className="w-full"
-          variant="flat"
+          variant="bordered"
           onClick={logout}
         >
           Выйти

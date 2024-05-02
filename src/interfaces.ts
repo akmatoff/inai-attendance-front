@@ -1,7 +1,11 @@
+import { ReactElement } from "react";
+
 export interface IResource {
   key: string;
   label: string;
   href: string;
+  description?: string;
+  icon?: ReactElement<SVGElement>;
 }
 
 export interface ILogin {
@@ -64,4 +68,9 @@ export interface IClassDay {
 
 export interface IRole {
   roleName: string;
+}
+
+export interface MutationQueryParams {
+  onSuccess?: () => void;
+  onError?: () => void;
 }
