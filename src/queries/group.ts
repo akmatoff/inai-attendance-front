@@ -57,14 +57,19 @@ export const useGroupStudents = (id: number) => {
   };
 };
 
-export const useGroupNameChange = () => {
+export const useGroupNameChange = ({
+  onSuccess,
+  onError,
+}: MutationQueryParams) => {
   const { mutate, isPending } = useMutation({
     mutationFn: (data: { groupId: number; name: string }) =>
       changeGroupName(data),
     onSuccess: () => {
+      onSuccess?.();
       toast.success("Имя группы изменено успешно");
     },
     onError: () => {
+      onError?.();
       toast.error("Произошла ошибка");
     },
   });

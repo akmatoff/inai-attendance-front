@@ -1,5 +1,6 @@
 import { ApiConstants } from "@/constants/apiConstants";
-import { useGroupCreation } from "@/queries/group";
+import { IGroup } from "@/interfaces";
+import { useGroupCreation, useGroupNameChange } from "@/queries/group";
 import {
   Button,
   Input,
@@ -16,16 +17,22 @@ interface Props {
   isOpen: boolean;
   onClose: () => void;
   onOpenChange: (isOpen: boolean) => void;
+  isEdit?: boolean;
+  group?: IGroup;
 }
 
 export default function GroupCreateModal({
   isOpen,
   onOpenChange,
   onClose,
+  group,
+  isEdit = false,
 }: Props) {
   const queryClient = useQueryClient();
-  const [groupName, setGroupName] = useState("");
-  const { mutate, isPending } = useGroupCreation({
+
+  const [groupName, setGroupName] = useState(group?.name || "");
+
+  const { mutate: create, isPending: isCreating } = useGroupCreation({
     onSuccess: () => {
       onClose();
       queryClient.invalidateQueries({
@@ -35,8 +42,23 @@ export default function GroupCreateModal({
     },
   });
 
+  const { mutate: changeName, isPending: isUpdating } = useGroupNameChange({
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [ApiConstants.GROUPS_LIST],
+        refetchType: "all",
+      });
+      onClose();
+    },
+  });
+
   const handleCreate = () => {
-    mutate(groupName);
+    if (group && isEdit) {
+      changeName({ groupId: group.id, name: groupName });
+      return;
+    }
+
+    create(groupName);
   };
 
   return (
@@ -44,7 +66,9 @@ export default function GroupCreateModal({
       <ModalContent>
         {(onClose) => (
           <>
-            <ModalHeader>Создание группы</ModalHeader>
+            <ModalHeader>
+              {!isEdit ? "Создание группы" : "Редактирование группы"}
+            </ModalHeader>
             <ModalBody>
               <Input
                 label="Название"
@@ -59,10 +83,11 @@ export default function GroupCreateModal({
               </Button>
               <Button
                 color="primary"
-                isLoading={isPending}
+                isLoading={isCreating || isUpdating}
                 onPress={handleCreate}
+                isDisabled={groupName.length < 3 || groupName === group?.name}
               >
-                Создать
+                {!isEdit ? "Создать" : "Изменить"}
               </Button>
             </ModalFooter>
           </>

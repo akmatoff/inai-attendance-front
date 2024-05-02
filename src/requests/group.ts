@@ -26,7 +26,7 @@ export const addStudentToGroup = async ({
   groupId: number;
 }) => {
   return request
-    .put(ApiConstants.GROUP_ADD_STUDENT, { params: { studentId, groupId } })
+    .put(ApiConstants.GROUP_ADD_STUDENT, {}, { params: { studentId, groupId } })
     .then(({ data }) => data);
 };
 
@@ -38,7 +38,7 @@ export const changeGroupName = async ({
   name: string;
 }) => {
   return request
-    .put(ApiConstants.GROUP_NAME, { params: { groupId, name } })
+    .put(ApiConstants.GROUP_NAME, {}, { params: { groupId, name } })
     .then(({ data }) => data);
 };
 

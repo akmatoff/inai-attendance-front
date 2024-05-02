@@ -37,7 +37,7 @@ export default function Sidebar() {
                 classNames={{ title: "font-semibold" }}
                 startContent={resource.icon}
                 description={resource.description}
-                onClick={() => navigate(resource.href)}
+                onPress={() => navigate(resource.href)}
               >
                 {resource.label}
               </ListboxItem>
@@ -51,7 +51,7 @@ export default function Sidebar() {
                 classNames={{ title: "font-semibold" }}
                 startContent={resource.icon}
                 description={resource.description}
-                onClick={() => navigate(resource.href)}
+                onPress={() => navigate(resource.href)}
               >
                 {resource.label}
               </ListboxItem>
@@ -65,7 +65,7 @@ export default function Sidebar() {
           color="default"
           className="w-full"
           variant="bordered"
-          onClick={logout}
+          onPress={logout}
         >
           Выйти
         </Button>

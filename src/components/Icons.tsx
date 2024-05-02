@@ -2,7 +2,7 @@ import { HTMLAttributes } from "react";
 import { FaUserGroup } from "react-icons/fa6";
 import { PiBooksFill } from "react-icons/pi";
 import { BiSolidCalendarAlt, BiSolidCalendarCheck } from "react-icons/bi";
-// import { MdCreate } from "react-icons/md";
+import { MdOutlineModeEditOutline } from "react-icons/md";
 import { IoMdAddCircle } from "react-icons/io";
 
 export const Icons = {
@@ -15,4 +15,7 @@ export const Icons = {
     <BiSolidCalendarCheck {...props} />
   ),
   ADD: (props: HTMLAttributes<SVGElement>) => <IoMdAddCircle {...props} />,
+  EDIT: (props: HTMLAttributes<SVGElement>) => (
+    <MdOutlineModeEditOutline {...props} />
+  ),
 };

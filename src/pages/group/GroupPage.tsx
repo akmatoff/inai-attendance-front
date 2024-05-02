@@ -1,20 +1,24 @@
 import Resource from "@/components/Resource";
 import { useGroups } from "@/queries/group";
 import {
-  getKeyValue,
   Table,
   TableBody,
   TableCell,
   TableColumn,
   TableHeader,
   TableRow,
+  Tooltip,
   useDisclosure,
 } from "@nextui-org/react";
 import GroupCreateModal from "./GroupCreateModal";
+import { Key } from "react";
+import { IGroup } from "@/interfaces";
+import { Icons } from "@/components/Icons";
 
 const columns = [
   { key: "id", label: "ID" },
   { key: "name", label: "Название" },
+  { key: "actions", label: "Действия" },
 ];
 
 export default function GroupPage() {
@@ -24,7 +28,7 @@ export default function GroupPage() {
 
   return (
     <Resource title="Группы" buttonText="Создать группу" onButtonClick={onOpen}>
-      <Table>
+      <Table aria-label="Группы" classNames={{ tr: "h-12" }}>
         <TableHeader columns={columns}>
           {(column) => (
             <TableColumn key={column.key}>{column.label}</TableColumn>
@@ -38,7 +42,9 @@ export default function GroupPage() {
           {(group) => (
             <TableRow key={group.id}>
               {(columnkey) => (
-                <TableCell>{getKeyValue(group, columnkey)}</TableCell>
+                <TableCell>
+                  <GroupRow group={group} columnKey={columnkey} />
+                </TableCell>
               )}
             </TableRow>
           )}
@@ -52,4 +58,38 @@ export default function GroupPage() {
       />
     </Resource>
   );
+}
+
+export function GroupRow({
+  group,
+  columnKey,
+}: {
+  group: IGroup;
+  columnKey: Key;
+}) {
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+
+  const cellValue = group[columnKey as keyof IGroup];
+
+  switch (columnKey) {
+    case "actions":
+      return (
+        <div className="flex relative items-center gap-3">
+          <Tooltip content="Изменить название">
+            <span className="cursor-pointer" onClick={onOpen}>
+              <Icons.EDIT className="text-xl" />
+            </span>
+          </Tooltip>
+          <GroupCreateModal
+            isOpen={isOpen}
+            onOpenChange={onOpenChange}
+            onClose={onClose}
+            group={group}
+            isEdit
+          />
+        </div>
+      );
+    default:
+      return cellValue;
+  }
 }
