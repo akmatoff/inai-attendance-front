@@ -3,6 +3,7 @@ import RootLayout from "./RootLayout";
 import Login from "@/pages/Login";
 import DashboardLayout from "./DashboardLayout";
 import GroupPage from "@/pages/group/GroupPage";
+import GroupStudents from "@/pages/group/GroupStudents";
 
 export default function RootRouter() {
   return (
@@ -12,6 +13,7 @@ export default function RootRouter() {
           <Route path="login" element={<Login />} />
           <Route path="dashboard" element={<DashboardLayout />}>
             <Route path="group" element={<GroupPage />} />
+            <Route path="group/:id/students" element={<GroupStudents />} />
           </Route>
         </Route>
       </Routes>

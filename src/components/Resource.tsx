@@ -22,14 +22,16 @@ export default function Resource({
           <div className="flex justify-between items-center">
             <h1 className="font-semibold">{title}</h1>
 
-            <Button
-              color="primary"
-              variant="light"
-              endContent={<Icons.ADD className="text-2xl" />}
-              onPress={onButtonClick}
-            >
-              {buttonText || "Создать"}
-            </Button>
+            {onButtonClick && (
+              <Button
+                color="primary"
+                variant="light"
+                endContent={<Icons.ADD className="text-2xl" />}
+                onPress={onButtonClick}
+              >
+                {buttonText || "Создать"}
+              </Button>
+            )}
           </div>
         </CardBody>
       </Card>

@@ -15,6 +15,8 @@ import { Key } from "react";
 import { IGroup } from "@/interfaces";
 import { Icons } from "@/components/Icons";
 import AddStudentModal from "./AddStudentModal";
+import { useNavigate } from "react-router";
+import { ROUTES } from "@/constants/routes";
 
 const columns = [
   { key: "id", label: "ID" },
@@ -76,6 +78,8 @@ export function GroupRow({
     onClose: onAddStudentClose,
   } = useDisclosure();
 
+  const navigate = useNavigate();
+
   const cellValue = group[columnKey as keyof IGroup];
 
   switch (columnKey) {
@@ -90,7 +94,19 @@ export function GroupRow({
 
           <Tooltip content="Добавить студента">
             <span className="cursor-pointer">
-              <Icons.ADD className="text-xl" onClick={onAddStudentOpen} />
+              <Icons.ADD
+                className="text-xl text-success"
+                onClick={onAddStudentOpen}
+              />
+            </span>
+          </Tooltip>
+
+          <Tooltip content="Получить список студентов">
+            <span className="cursor-pointer">
+              <Icons.USER_LIST
+                className="text-xl"
+                onClick={() => navigate(ROUTES.GROUP_STUDENTS(group.id))}
+              />
             </span>
           </Tooltip>
 
@@ -114,5 +130,3 @@ export function GroupRow({
       return cellValue;
   }
 }
-
-export function ActionsCell() {}

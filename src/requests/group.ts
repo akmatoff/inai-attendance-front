@@ -12,9 +12,11 @@ export const createGroup = async (name: string) => {
     .then(({ data }) => data);
 };
 
-export const getGroupStudents = async (id: number): Promise<IStudent[]> => {
+export const getGroupStudents = async (
+  groupId: number
+): Promise<IStudent[]> => {
   return request
-    .get(ApiConstants.GROUP, { params: { id } })
+    .get(ApiConstants.GROUP, { params: { groupId } })
     .then(({ data }) => data);
 };
 

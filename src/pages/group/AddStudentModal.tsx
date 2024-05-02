@@ -46,11 +46,11 @@ export default function AddStudentModal({
 
   return (
     <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-      <ModalContent>
+      <ModalContent className="h-[620px]">
         {(onClose) => (
           <>
             <ModalHeader>Добавление студента в группу</ModalHeader>
-            <ModalBody>
+            <ModalBody className="overflow-y-scroll">
               {!isLoading && (
                 <Listbox
                   label="Список студентов"
