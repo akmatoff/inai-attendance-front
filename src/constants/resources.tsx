@@ -3,6 +3,12 @@ import { IResource } from "@/interfaces";
 import { ROUTES } from "./routes";
 
 export const resourcesListSection: IResource[] = [
+  // {
+  //   key: "users",
+  //   label: "",
+  //   description: "",
+  //   href: ROUTES,
+  // },
   {
     key: "groups",
     label: "Группы",

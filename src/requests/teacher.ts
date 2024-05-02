@@ -1,7 +1,8 @@
 import { ApiConstants } from "@/constants/apiConstants";
 import { request } from "./request";
+import { ITeacher } from "@/interfaces";
 
-export const getTeachers = async () => {
+export const getTeachers = async (): Promise<ITeacher[]> => {
   return request.get(ApiConstants.TEACHERS_LIST).then(({ data }) => data);
 };
 

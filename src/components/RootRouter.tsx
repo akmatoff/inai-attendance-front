@@ -5,6 +5,7 @@ import DashboardLayout from "./DashboardLayout";
 import GroupPage from "@/pages/group/GroupPage";
 import GroupStudents from "@/pages/group/GroupStudents";
 import SubjectsPage from "@/pages/subject/SubjectsPage";
+import SchedulePage from "@/pages/schedule/SchedulePage";
 
 export default function RootRouter() {
   return (
@@ -16,6 +17,7 @@ export default function RootRouter() {
             <Route path="group" element={<GroupPage />} />
             <Route path="group/:id/students" element={<GroupStudents />} />
             <Route path="subject" element={<SubjectsPage />} />
+            <Route path="schedule" element={<SchedulePage />} />
           </Route>
         </Route>
       </Routes>

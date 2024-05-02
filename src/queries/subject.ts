@@ -54,10 +54,15 @@ export const useSubjectUpdate = ({
   };
 };
 
-export const useScheduleMutation = (id: number) => {
+export const useScheduleMutation = ({
+  onSuccess,
+  onError,
+}: MutationQueryParams) => {
   const { mutate, isPending } = useMutation({
-    mutationFn: (data: ISchedule) =>
+    mutationFn: ({ data, id }: { data: ISchedule; id?: number }) =>
       id ? updateSubjectSchedule(id, data) : createSubjectSchedule(data),
+    onSuccess,
+    onError,
   });
 
   return {

@@ -58,7 +58,7 @@ export interface ISchedule {
   classTimeId: number;
   subjectId: number;
   groupId: number;
-  teachedId: number;
+  teacherId: number;
   classDayId: number;
 }
 
