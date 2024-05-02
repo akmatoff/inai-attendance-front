@@ -11,6 +11,7 @@ import {
   ModalHeader,
 } from "@nextui-org/react";
 import { useQueryClient } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
@@ -68,6 +69,10 @@ export default function SubjectCreateModal({
     }
     create(data);
   };
+
+  useEffect(() => {
+    subjectForm.reset(subject);
+  }, [subject, subjectForm]);
 
   return (
     <Modal isOpen={isOpen} onOpenChange={onOpenChange}>

@@ -8,16 +8,19 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
+  Tooltip,
   useDisclosure,
 } from "@nextui-org/react";
 import { Key } from "react";
 import SubjectCreateModal from "./SubjectCreateModal";
+import { Icons } from "@/components/Icons";
 
 const columns = [
   { key: "id", label: "ID" },
   { key: "name", label: "Название" },
   { key: "year", label: "Год" },
   { key: "semester", label: "Семестр" },
+  { key: "actions", label: "Действия" },
 ];
 
 export default function SubjectsPage() {
@@ -69,9 +72,29 @@ export function SubjectRow({
   subject: ISubject;
   columnKey: Key;
 }) {
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+
   const cellValue = subject[columnKey as keyof ISubject];
 
   switch (columnKey) {
+    case "actions":
+      return (
+        <div className="flex relative gap-3">
+          <Tooltip content="Изменить предмет">
+            <span className="cursor-pointer">
+              <Icons.EDIT className="text-xl" onClick={onOpen} />
+            </span>
+          </Tooltip>
+
+          <SubjectCreateModal
+            isEdit
+            isOpen={isOpen}
+            onOpenChange={onOpenChange}
+            onClose={onClose}
+            subject={subject}
+          />
+        </div>
+      );
     default:
       return cellValue;
   }
