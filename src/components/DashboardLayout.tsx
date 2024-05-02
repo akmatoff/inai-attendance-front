@@ -1,11 +1,11 @@
 import { Outlet, useNavigate } from "react-router";
-// import { Navbar, NavbarContent, NavbarItem } from "@nextui-org/react";
+import { Navbar, NavbarContent, NavbarItem } from "@nextui-org/react";
 import Sidebar from "./Sidebar";
 import { useEffect, useMemo } from "react";
 import { ROUTES } from "@/constants/routes";
 import toast from "react-hot-toast";
 import { StorageKeys } from "@/constants/storageKeys";
-// import { Navbar, NavbarContent, NavbarItem } from "@nextui-org/react";
+import { Icons } from "./Icons";
 
 export default function DashboardLayout() {
   const navigate = useNavigate();
@@ -28,17 +28,30 @@ export default function DashboardLayout() {
         <Sidebar />
 
         <div className="flex-[5_1_25%] overflow-y-scroll">
-          {/* <Navbar
-            position="static"
+          <Navbar
+            position="sticky"
             className="px-1 justify-between"
             maxWidth="full"
           >
             <NavbarContent justify="end">
-              <NavbarItem></NavbarItem>
-            </NavbarContent>
-          </Navbar> */}
+              <NavbarItem>
+                <div className="flex items-center">
+                  <Icons.USER className="text-3xl mr-2" />
 
-          <div className="flex flex-col justify-center items-center w-full min-h-full p-20">
+                  <div className="flex flex-col">
+                    <h1 className="text-lg font-bold text-primary">
+                      {localStorage.getItem(StorageKeys.USERNAME)}
+                    </h1>
+                    <p className="text-sm font-light -mt-2">
+                      {localStorage.getItem(StorageKeys.ROLE)}
+                    </p>
+                  </div>
+                </div>
+              </NavbarItem>
+            </NavbarContent>
+          </Navbar>
+
+          <div className="flex flex-col justify-center items-center w-full p-20">
             <Outlet />
           </div>
         </div>

@@ -24,6 +24,8 @@ export default function Resource({
 
             {onButtonClick && (
               <Button
+                size="sm"
+                radius="lg"
                 color="primary"
                 variant="light"
                 endContent={<Icons.ADD className="text-2xl" />}

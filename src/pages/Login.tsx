@@ -41,6 +41,11 @@ export default function Login() {
 
       navigate(ROUTES.DASHBOARD);
       localStorage.setItem(StorageKeys.TOKEN, data.token);
+      localStorage.setItem(StorageKeys.ROLE, data.role);
+      localStorage.setItem(
+        StorageKeys.USERNAME,
+        loginForm.getValues("username")
+      );
       toast.success("Авторизация успешна!");
     },
     onError: () => {
