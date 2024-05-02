@@ -1,5 +1,5 @@
 import { ApiConstants } from "@/constants/apiConstants";
-import { ISchedule, ISubjectCreate } from "@/interfaces";
+import { ISchedule, ISubjectCreate, MutationQueryParams } from "@/interfaces";
 import {
   createSubject,
   createSubjectSchedule,
@@ -21,9 +21,14 @@ export const useSubjects = () => {
   };
 };
 
-export const useSubjectCreate = () => {
+export const useSubjectCreate = ({
+  onSuccess,
+  onError,
+}: MutationQueryParams) => {
   const { mutate, isPending } = useMutation({
     mutationFn: (data: ISubjectCreate) => createSubject(data),
+    onSuccess,
+    onError,
   });
 
   return {
@@ -32,9 +37,15 @@ export const useSubjectCreate = () => {
   };
 };
 
-export const useSubjectUpdate = (id: number) => {
+export const useSubjectUpdate = ({
+  onSuccess,
+  onError,
+}: MutationQueryParams) => {
   const { mutate, isPending } = useMutation({
-    mutationFn: (data: ISubjectCreate) => updateSubject(id, data),
+    mutationFn: ({ data, id }: { data: ISubjectCreate; id: number }) =>
+      updateSubject(id, data),
+    onSuccess,
+    onError,
   });
 
   return {

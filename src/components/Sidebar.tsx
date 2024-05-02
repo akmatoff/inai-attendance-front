@@ -12,6 +12,7 @@ import {
 } from "@nextui-org/react";
 import { useNavigate } from "react-router";
 import Logo from "./Logo";
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   const navigate = useNavigate();
@@ -27,7 +28,9 @@ export default function Sidebar() {
     <div className="flex flex-col justify-between flex-[1_1_0%] h-screen border-r-2 border-slate-100">
       <div>
         <div className="p-4 border-b-1">
-          <Logo />
+          <Link to={ROUTES.DASHBOARD}>
+            <Logo />
+          </Link>
         </div>
 
         <Listbox aria-label="Ресурсы">

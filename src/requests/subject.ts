@@ -1,8 +1,8 @@
-import { ISchedule, ISubjectCreate } from "@/interfaces";
+import { ISchedule, ISubject, ISubjectCreate } from "@/interfaces";
 import { request } from "./request";
 import { ApiConstants } from "@/constants/apiConstants";
 
-export const getSubjects = async () => {
+export const getSubjects = async (): Promise<ISubject[]> => {
   return request.get(ApiConstants.SUBJECTS_LIST).then(({ data }) => data);
 };
 

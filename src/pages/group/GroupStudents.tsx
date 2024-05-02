@@ -90,7 +90,7 @@ function StudentRow({
     onSuccess: () => {
       toast.success("Успешно удалено");
       queryClient.invalidateQueries({
-        queryKey: [ApiConstants.STUDENTS_LIST],
+        queryKey: [ApiConstants.GROUP],
         refetchType: "all",
       });
       onClose();
