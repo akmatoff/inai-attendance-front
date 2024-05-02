@@ -3,7 +3,7 @@ import { FaUserGroup, FaUserPlus } from "react-icons/fa6";
 import { PiBooksFill, PiUserListFill } from "react-icons/pi";
 import { BiSolidCalendarAlt, BiSolidCalendarCheck } from "react-icons/bi";
 import { MdOutlineModeEditOutline } from "react-icons/md";
-import { IoMdAdd } from "react-icons/io";
+import { IoMdAdd, IoIosArrowBack } from "react-icons/io";
 import { RiUser5Fill } from "react-icons/ri";
 
 export const Icons = {
@@ -24,4 +24,7 @@ export const Icons = {
     <PiUserListFill {...props} />
   ),
   USER: (props: HTMLAttributes<SVGElement>) => <RiUser5Fill {...props} />,
+  ARROW_LEFT: (props: HTMLAttributes<SVGElement>) => (
+    <IoIosArrowBack {...props} />
+  ),
 };

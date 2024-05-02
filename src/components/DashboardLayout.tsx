@@ -33,6 +33,11 @@ export default function DashboardLayout() {
             className="px-1 justify-between"
             maxWidth="full"
           >
+            <NavbarContent>
+              <NavbarItem>
+                <h1 className="font-light text-xl">Панель управления</h1>
+              </NavbarItem>
+            </NavbarContent>
             <NavbarContent justify="end">
               <NavbarItem>
                 <div className="flex items-center">

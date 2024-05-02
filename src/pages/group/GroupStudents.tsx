@@ -1,6 +1,8 @@
+import { Icons } from "@/components/Icons";
 import Resource from "@/components/Resource";
 import { useGroupStudents } from "@/queries/group";
 import {
+  Button,
   getKeyValue,
   Table,
   TableBody,
@@ -9,7 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 const columns = [
   { key: "id", label: "ID" },
@@ -22,31 +24,43 @@ export default function GroupStudents() {
 
   const { data: students, isLoading } = useGroupStudents(+id!);
 
+  const navigate = useNavigate();
+
   return (
-    <Resource title="Студенты">
-      <Table aria-label="Группы" classNames={{ tr: "h-14" }}>
-        <TableHeader columns={columns}>
-          {(column) => (
-            <TableColumn key={column.key}>{column.label}</TableColumn>
-          )}
-        </TableHeader>
-        <TableBody
-          items={students || []}
-          emptyContent="Нет студентов в данной группе."
-          isLoading={isLoading}
-        >
-          {(student) => (
-            <TableRow key={student.id}>
-              {(columnKey) => (
-                <TableCell>
-                  {getKeyValue(student, columnKey)}
-                  {/* <GroupRow group={group} columnKey={columnkey} /> */}
-                </TableCell>
-              )}
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
-    </Resource>
+    <div className="flex flex-col items-start gap-2 w-full">
+      <Button
+        size="md"
+        variant="light"
+        startContent={<Icons.ARROW_LEFT className="text-md" />}
+        onPress={() => navigate(-1)}
+      >
+        Назад
+      </Button>
+      <Resource title="Студенты">
+        <Table aria-label="Группы" classNames={{ tr: "h-14" }}>
+          <TableHeader columns={columns}>
+            {(column) => (
+              <TableColumn key={column.key}>{column.label}</TableColumn>
+            )}
+          </TableHeader>
+          <TableBody
+            items={students || []}
+            emptyContent="Нет студентов в данной группе."
+            isLoading={isLoading}
+          >
+            {(student) => (
+              <TableRow key={student.id}>
+                {(columnKey) => (
+                  <TableCell>
+                    {getKeyValue(student, columnKey)}
+                    {/* <GroupRow group={group} columnKey={columnkey} /> */}
+                  </TableCell>
+                )}
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </Resource>
+    </div>
   );
 }
