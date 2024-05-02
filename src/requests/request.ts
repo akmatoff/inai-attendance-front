@@ -26,6 +26,8 @@ request.interceptors.response.use(
       localStorage.removeItem(StorageKeys.TOKEN);
     } else if (error.response.status === 403) {
       toast.error("У вас нет доступа к данному ресурсу");
+    } else if (error.response.status === 400) {
+      toast.error(error.response.data.message);
     }
 
     return Promise.reject(error.response || error.message);

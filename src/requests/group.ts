@@ -1,6 +1,6 @@
 import { ApiConstants } from "@/constants/apiConstants";
 import { request } from "./request";
-import { IGroup, IStudent } from "@/interfaces";
+import { IGroup, IGroupStudent, IStudent } from "@/interfaces";
 
 export const getGroups = async (): Promise<IGroup[]> => {
   return request.get(ApiConstants.GROUPS_LIST).then(({ data }) => data);
@@ -14,7 +14,7 @@ export const createGroup = async (name: string) => {
 
 export const getGroupStudents = async (
   groupId: number
-): Promise<IStudent[]> => {
+): Promise<IGroupStudent[]> => {
   return request
     .get(ApiConstants.GROUP, { params: { groupId } })
     .then(({ data }) => data);

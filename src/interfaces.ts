@@ -19,6 +19,12 @@ export interface IStudent {
   absenceNum: number;
 }
 
+export interface IGroupStudent {
+  id: number;
+  fullName: string;
+  absenceNum: number;
+}
+
 export interface IGroup {
   id: number;
   name: string;

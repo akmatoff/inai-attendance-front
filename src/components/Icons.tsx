@@ -5,6 +5,7 @@ import { BiSolidCalendarAlt, BiSolidCalendarCheck } from "react-icons/bi";
 import { MdOutlineModeEditOutline } from "react-icons/md";
 import { IoMdAdd, IoIosArrowBack } from "react-icons/io";
 import { RiUser5Fill } from "react-icons/ri";
+import { GrFormTrash } from "react-icons/gr";
 
 export const Icons = {
   GROUP: (props: HTMLAttributes<SVGElement>) => <FaUserGroup {...props} />,
@@ -27,4 +28,5 @@ export const Icons = {
   ARROW_LEFT: (props: HTMLAttributes<SVGElement>) => (
     <IoIosArrowBack {...props} />
   ),
+  DELETE: (props: HTMLAttributes<SVGElement>) => <GrFormTrash {...props} />,
 };

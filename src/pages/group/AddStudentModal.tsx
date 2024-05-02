@@ -1,3 +1,4 @@
+import { ApiConstants } from "@/constants/apiConstants";
 import { IGroup, IStudent } from "@/interfaces";
 import { useAllStudents, useGroupStudentAdd } from "@/queries/group";
 import {
@@ -11,6 +12,7 @@ import {
   ModalHeader,
   Spinner,
 } from "@nextui-org/react";
+import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -27,9 +29,18 @@ export default function AddStudentModal({
   onClose,
   group,
 }: Props) {
+  const queryClient = useQueryClient();
+
   const { mutate, isPending } = useGroupStudentAdd({
     onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [ApiConstants.STUDENTS_LIST],
+        refetchType: "all",
+      });
       toast.success("Студент успешно добавлен");
+      onClose();
+    },
+    onError: () => {
       onClose();
     },
   });

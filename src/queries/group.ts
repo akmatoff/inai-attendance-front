@@ -98,10 +98,15 @@ export const useGroupStudentAdd = ({
   };
 };
 
-export const useGroupStudentRemove = () => {
+export const useGroupStudentRemove = ({
+  onSuccess,
+  onError,
+}: MutationQueryParams) => {
   const { mutate, isPending } = useMutation({
     mutationFn: (data: { groupId: number; studentId: number }) =>
       removeGroupStudent(data),
+    onSuccess,
+    onError,
   });
 
   return {
