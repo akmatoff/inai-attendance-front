@@ -14,6 +14,7 @@ import GroupCreateModal from "./GroupCreateModal";
 import { Key } from "react";
 import { IGroup } from "@/interfaces";
 import { Icons } from "@/components/Icons";
+import AddStudentModal from "./AddStudentModal";
 
 const columns = [
   { key: "id", label: "ID" },
@@ -28,7 +29,7 @@ export default function GroupPage() {
 
   return (
     <Resource title="Группы" buttonText="Создать группу" onButtonClick={onOpen}>
-      <Table aria-label="Группы" classNames={{ tr: "h-12" }}>
+      <Table aria-label="Группы" classNames={{ tr: "h-14" }}>
         <TableHeader columns={columns}>
           {(column) => (
             <TableColumn key={column.key}>{column.label}</TableColumn>
@@ -68,6 +69,12 @@ export function GroupRow({
   columnKey: Key;
 }) {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+  const {
+    isOpen: isAddStudentOpen,
+    onOpen: onAddStudentOpen,
+    onOpenChange: onAddStudentOpenChange,
+    onClose: onAddStudentClose,
+  } = useDisclosure();
 
   const cellValue = group[columnKey as keyof IGroup];
 
@@ -80,6 +87,20 @@ export function GroupRow({
               <Icons.EDIT className="text-xl" />
             </span>
           </Tooltip>
+
+          <Tooltip content="Добавить студента">
+            <span className="cursor-pointer">
+              <Icons.ADD className="text-xl" onClick={onAddStudentOpen} />
+            </span>
+          </Tooltip>
+
+          <AddStudentModal
+            isOpen={isAddStudentOpen}
+            onOpenChange={onAddStudentOpenChange}
+            onClose={onAddStudentClose}
+            group={group}
+          />
+
           <GroupCreateModal
             isOpen={isOpen}
             onOpenChange={onOpenChange}
@@ -93,3 +114,5 @@ export function GroupRow({
       return cellValue;
   }
 }
+
+export function ActionsCell() {}

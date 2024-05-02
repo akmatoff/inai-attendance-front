@@ -55,3 +55,7 @@ export const removeGroupStudent = async ({
     })
     .then(({ data }) => data);
 };
+
+export const getAllStudents = async (): Promise<IStudent[]> => {
+  return request.get(ApiConstants.STUDENTS_LIST).then(({ data }) => data);
+};

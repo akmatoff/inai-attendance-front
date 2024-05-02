@@ -18,6 +18,7 @@ export class ApiConstants {
   static GROUPS_LIST = this.API_URL.concat("/options/groups");
   static GROUPS_LIST_WITH_STUDENTS = this.GROUP.concat("/all");
   static TEACHERS_LIST = this.API_URL.concat("/options/teachers");
+  static STUDENTS_LIST = this.API_URL.concat("/options/students");
   static ROLES_LIST = this.API_URL.concat("/options/roles");
   static CLASS_TIMES_LIST = this.API_URL.concat("/options/class-times");
   static CLASS_DAYS_LIST = this.API_URL.concat("/options/class-days");

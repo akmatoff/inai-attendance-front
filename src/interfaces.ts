@@ -15,7 +15,7 @@ export interface ILogin {
 
 export interface IStudent {
   id: number;
-  fullName: string;
+  name: string;
   absenceNum: number;
 }
 

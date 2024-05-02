@@ -4,6 +4,7 @@ import {
   addStudentToGroup,
   changeGroupName,
   createGroup,
+  getAllStudents,
   getGroups,
   getGroupStudents,
   removeGroupStudent,
@@ -80,10 +81,15 @@ export const useGroupNameChange = ({
   };
 };
 
-export const useGroupStudentAdd = () => {
+export const useGroupStudentAdd = ({
+  onSuccess,
+  onError,
+}: MutationQueryParams) => {
   const { mutate, isPending } = useMutation({
     mutationFn: (data: { groupId: number; studentId: number }) =>
       addStudentToGroup(data),
+    onSuccess,
+    onError,
   });
 
   return {
@@ -101,5 +107,17 @@ export const useGroupStudentRemove = () => {
   return {
     mutate,
     isPending,
+  };
+};
+
+export const useAllStudents = () => {
+  const { data, isLoading } = useQuery({
+    queryFn: getAllStudents,
+    queryKey: [ApiConstants.STUDENTS_LIST],
+  });
+
+  return {
+    data,
+    isLoading,
   };
 };
