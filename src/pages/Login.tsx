@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 import { ROUTES } from "@/constants/routes";
 import Logo from "@/components/Logo";
+import { StorageKeys } from "@/constants/storageKeys";
 
 const loginValidationSchema = Yup.object({
   username: Yup.string()
@@ -32,8 +33,9 @@ export default function Login() {
   });
 
   const { mutate: login, isPending } = useLogin({
-    onSuccess: () => {
+    onSuccess: (data) => {
       navigate(ROUTES.DASHBOARD);
+      localStorage.setItem(StorageKeys.TOKEN, data.token);
       toast.success("Авторизация успешна!");
     },
     onError: () => {

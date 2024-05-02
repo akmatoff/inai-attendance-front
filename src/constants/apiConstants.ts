@@ -1,7 +1,7 @@
 export class ApiConstants {
   static BASE_URL = "http://localhost:8080";
   static API_URL = this.BASE_URL.concat("/api/v1");
-  static LOGIN = this.API_URL.concat("/login");
+  static LOGIN = this.API_URL.concat("/auth/login");
   static SUBJECT = this.API_URL.concat("/subject");
   static GROUP = this.API_URL.concat("/group");
   static GROUP_ADD_STUDENT = this.GROUP.concat("/add/student");
