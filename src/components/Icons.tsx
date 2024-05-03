@@ -2,7 +2,7 @@ import { HTMLAttributes } from "react";
 import { FaUserGroup, FaUserPlus } from "react-icons/fa6";
 import { PiBooksFill, PiUserListFill } from "react-icons/pi";
 import { BiSolidCalendarAlt, BiSolidCalendarCheck } from "react-icons/bi";
-import { MdOutlineModeEditOutline } from "react-icons/md";
+import { MdOutlineModeEditOutline, MdGroupAdd } from "react-icons/md";
 import { IoMdAdd, IoIosArrowBack } from "react-icons/io";
 import { RiUser5Fill, RiLockPasswordLine } from "react-icons/ri";
 import { GrFormTrash } from "react-icons/gr";
@@ -32,4 +32,5 @@ export const Icons = {
   PASSWORD: (props: HTMLAttributes<SVGElement>) => (
     <RiLockPasswordLine {...props} />
   ),
+  GROUP_ADD: (props: HTMLAttributes<SVGElement>) => <MdGroupAdd {...props} />,
 };

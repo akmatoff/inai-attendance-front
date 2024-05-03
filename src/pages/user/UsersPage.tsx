@@ -15,6 +15,7 @@ import { Icons } from "@/components/Icons";
 import { useUsers } from "@/queries/user";
 import UserCreateModal from "./UserCreateModal";
 import ChangePasswordPopover from "./ChangePasswordPopover";
+import ChangeGroupModal from "./ChangeGroupModal";
 
 const columns = [
   { key: "id", label: "ID" },
@@ -70,6 +71,12 @@ export default function UsersPage() {
 
 export function UserRow({ user, columnKey }: { user: IUser; columnKey: Key }) {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+  const {
+    isOpen: isChangeGroupOpen,
+    onOpen: onChangeGroupOpen,
+    onOpenChange: onChangeGroupOpenChange,
+    onClose: onChangeGroupClose,
+  } = useDisclosure();
 
   const cellValue = user[columnKey as keyof IUser];
 
@@ -89,6 +96,23 @@ export function UserRow({ user, columnKey }: { user: IUser; columnKey: Key }) {
                 <Icons.PASSWORD className="text-xl" />
               </span>
             }
+          />
+          {user.role === "Студент" && (
+            <Tooltip content="Изменить группу">
+              <span className="cursor-pointer">
+                <Icons.GROUP_ADD
+                  className="text-xl"
+                  onClick={onChangeGroupOpen}
+                />
+              </span>
+            </Tooltip>
+          )}
+
+          <ChangeGroupModal
+            isOpen={isChangeGroupOpen}
+            onOpenChange={onChangeGroupOpenChange}
+            onClose={onChangeGroupClose}
+            user={user}
           />
 
           <UserCreateModal

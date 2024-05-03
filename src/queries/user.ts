@@ -127,7 +127,7 @@ export const usePasswordChange = ({
   };
 };
 
-export const useStudentGroupChange = () => {
+export const useStudentGroupChange = ({ onSuccess }: MutationQueryParams) => {
   const { mutate, isPending } = useMutation({
     mutationFn: ({
       studentId,
@@ -136,6 +136,7 @@ export const useStudentGroupChange = () => {
       studentId: number;
       groupId: number;
     }) => changeStudentGroup(studentId, groupId),
+    onSuccess,
   });
 
   return {
