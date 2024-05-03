@@ -33,22 +33,27 @@ export default function Sidebar() {
           </Link>
         </div>
 
-        <Listbox aria-label="Ресурсы">
-          <ListboxSection title="Cписки" showDivider>
-            {resourcesListSection.map((resource) => (
-              <ListboxItem
-                key={resource.key}
-                className="px-6 py-3 mb-2"
-                classNames={{ title: "font-semibold" }}
-                startContent={resource.icon}
-                description={resource.description}
-                onPress={() => navigate(resource.href)}
-              >
-                {resource.label}
-              </ListboxItem>
-            ))}
-          </ListboxSection>
-          <ListboxSection title="Учет">
+        {localStorage.getItem(StorageKeys.ROLE) === "ADMIN" ? (
+          <Listbox aria-label="Ресурсы">
+            <ListboxSection title="Администрация" showDivider>
+              {resourcesListSection.map((resource) => (
+                <ListboxItem
+                  key={resource.key}
+                  className="px-6 py-3 mb-2"
+                  classNames={{ title: "font-semibold" }}
+                  startContent={resource.icon}
+                  description={resource.description}
+                  onPress={() => navigate(resource.href)}
+                >
+                  {resource.label}
+                </ListboxItem>
+              ))}
+            </ListboxSection>
+          </Listbox>
+        ) : null}
+
+        <Listbox aria-label="Преподаватель">
+          <ListboxSection title="Преподаватель">
             {resourcesActionSection.map((resource) => (
               <ListboxItem
                 key={resource.key}

@@ -7,5 +7,6 @@ export const ROUTES = {
   STUDENT: "/dashboard/student",
   SUBJECT: "/dashboard/subject",
   SCHEDULE: "/dashboard/schedule",
+  TEACHER_SCHEDULE: "/dashboard/teacher-schedule",
   LOGIN: "/login",
 };

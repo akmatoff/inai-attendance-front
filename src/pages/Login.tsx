@@ -49,7 +49,7 @@ export default function Login() {
       toast.success("Авторизация успешна!");
     },
     onError: () => {
-      toast.error("Неверный логин или пароль");
+      toast.error("Произошла ошибка");
     },
   });
 

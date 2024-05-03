@@ -7,6 +7,7 @@ import GroupStudents from "@/pages/group/GroupStudents";
 import SubjectsPage from "@/pages/subject/SubjectsPage";
 import SchedulePage from "@/pages/schedule/SchedulePage";
 import UsersPage from "@/pages/user/UsersPage";
+import TeacherSchedulePage from "@/pages/teacherSchedule/TeacherSchedulePage";
 
 export default function RootRouter() {
   return (
@@ -20,6 +21,7 @@ export default function RootRouter() {
             <Route path="subject" element={<SubjectsPage />} />
             <Route path="schedule" element={<SchedulePage />} />
             <Route path="user" element={<UsersPage />} />
+            <Route path="teacher-schedule" element={<TeacherSchedulePage />} />
           </Route>
         </Route>
       </Routes>

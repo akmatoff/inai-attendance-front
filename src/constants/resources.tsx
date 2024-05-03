@@ -17,11 +17,6 @@ export const resourcesListSection: IResource[] = [
     href: ROUTES.GROUP,
     icon: <Icons.GROUP />,
   },
-  // {
-  //   key: "students",
-  //   label: "Студенты",
-  //   href: "/students",
-  // },
   {
     key: "subjects",
     label: "Предметы",
@@ -48,5 +43,13 @@ export const resourcesActionSection: IResource[] = [
 
     href: "/attendance",
     icon: <Icons.CALENDAR_CHECKED />,
+  },
+  {
+    key: "schedule-today",
+    label: "Пары",
+    description: "Список пар на сегодня",
+
+    href: ROUTES.TEACHER_SCHEDULE,
+    icon: <Icons.CALENDAR />,
   },
 ];
