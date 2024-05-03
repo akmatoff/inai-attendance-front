@@ -71,9 +71,10 @@ export const useAdminCreate = ({ onSuccess, onError }: MutationQueryParams) => {
   };
 };
 
-export const useUserActivate = () => {
+export const useUserActivate = ({ onSuccess }: MutationQueryParams) => {
   const { mutate, isPending } = useMutation({
     mutationFn: (id: number) => activateUser(id),
+    onSuccess,
   });
 
   return {
@@ -82,9 +83,10 @@ export const useUserActivate = () => {
   };
 };
 
-export const useUserDeactivate = () => {
+export const useUserDeactivate = ({ onSuccess }: MutationQueryParams) => {
   const { mutate, isPending } = useMutation({
     mutationFn: (id: number) => deactivateUser(id),
+    onSuccess,
   });
 
   return {

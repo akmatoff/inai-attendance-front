@@ -22,13 +22,13 @@ export const createAdmin = async (data: IUserCreate) => {
 
 export const activateUser = async (id: number) => {
   return request
-    .put(ApiConstants.USER_ACTIVATE, { params: { id } })
+    .put(ApiConstants.USER_ACTIVATE, {}, { params: { id } })
     .then(({ data }) => data);
 };
 
 export const deactivateUser = async (id: number) => {
   return request
-    .put(ApiConstants.USER_DEACTIVATE, { params: { id } })
+    .put(ApiConstants.USER_DEACTIVATE, {}, { params: { id } })
     .then(({ data }) => data);
 };
 

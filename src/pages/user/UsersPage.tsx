@@ -9,13 +9,15 @@ import {
   Tooltip,
   useDisclosure,
 } from "@nextui-org/react";
-import { Key } from "react";
+import { Key, useCallback } from "react";
 import { IUser } from "@/interfaces";
 import { Icons } from "@/components/Icons";
-import { useUsers } from "@/queries/user";
+import { useUserActivate, useUserDeactivate, useUsers } from "@/queries/user";
 import UserCreateModal from "./UserCreateModal";
 import ChangePasswordPopover from "./ChangePasswordPopover";
 import ChangeGroupModal from "./ChangeGroupModal";
+import ConfirmModal from "@/components/ConfirmModal";
+import toast from "react-hot-toast";
 
 const columns = [
   { key: "id", label: "ID" },
@@ -72,13 +74,34 @@ export default function UsersPage() {
 export function UserRow({ user, columnKey }: { user: IUser; columnKey: Key }) {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
   const {
+    isOpen: isConfirmOpen,
+    onOpen: onConfirmOpen,
+    onOpenChange: onConfirmOpenChange,
+    onClose: onConfirmClose,
+  } = useDisclosure();
+  const {
     isOpen: isChangeGroupOpen,
     onOpen: onChangeGroupOpen,
     onOpenChange: onChangeGroupOpenChange,
     onClose: onChangeGroupClose,
   } = useDisclosure();
 
+  const { mutate: deactivateUser, isPending } = useUserDeactivate({
+    onSuccess: () => {
+      onConfirmClose();
+      toast.success("Пользователь деактивирован успешно");
+    },
+  });
+
+  const { mutate: activateUser } = useUserActivate({
+    onSuccess: () => toast.success("Пользователь активирован успешно"),
+  });
+
   const cellValue = user[columnKey as keyof IUser];
+
+  const handleUserDeactivate = useCallback(() => {
+    deactivateUser(user.id);
+  }, [user.id, deactivateUser]);
 
   switch (columnKey) {
     case "actions":
@@ -107,6 +130,31 @@ export function UserRow({ user, columnKey }: { user: IUser; columnKey: Key }) {
               </span>
             </Tooltip>
           )}
+          <Tooltip content="Деактивировать пользователя">
+            <span className="cursor-pointer">
+              <Icons.REMOVE_CIRCLE
+                className="text-xl text-danger"
+                onClick={onConfirmOpen}
+              />
+            </span>
+          </Tooltip>
+          <Tooltip content="Активировать пользователя">
+            <span className="cursor-pointer">
+              <Icons.CHECKMARK_CIRCLE
+                className="text-xl text-success"
+                onClick={() => activateUser(user.id)}
+              />
+            </span>
+          </Tooltip>
+
+          <ConfirmModal
+            isOpen={isConfirmOpen}
+            onOpenChange={onConfirmOpenChange}
+            isLoading={isPending}
+            title="Деактивация пользователя"
+            description="Вы уверены, что хотите деактивировать данного пользователя?"
+            onConfirm={handleUserDeactivate}
+          />
 
           <ChangeGroupModal
             isOpen={isChangeGroupOpen}
