@@ -93,10 +93,15 @@ export const useUserDeactivate = () => {
   };
 };
 
-export const useUsernameChange = () => {
+export const useUsernameChange = ({
+  onSuccess,
+  onError,
+}: MutationQueryParams) => {
   const { mutate, isPending } = useMutation({
     mutationFn: ({ data, id }: { data: IUserCreate; id: number }) =>
       changeUsername(id, data),
+    onSuccess,
+    onError,
   });
 
   return {

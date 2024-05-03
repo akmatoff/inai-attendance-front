@@ -34,13 +34,13 @@ export const deactivateUser = async (id: number) => {
 
 export const changeUsername = async (id: number, data: IUserCreate) => {
   return request
-    .put(ApiConstants.USER_NAME, { data, params: { id } })
+    .put(ApiConstants.USER_NAME, data, { params: { id } })
     .then(({ data }) => data);
 };
 
 export const changeUserPassword = async (id: number, data: IUserCreate) => {
   return request
-    .put(ApiConstants.USER_PASSWORD, { data, params: { id } })
+    .put(ApiConstants.USER_PASSWORD, data, { params: { id } })
     .then(({ data }) => data);
 };
 
@@ -49,6 +49,10 @@ export const changeStudentGroup = async (
   groupId: number
 ) => {
   return request
-    .put(ApiConstants.USER_STUDENT_GROUP, { params: { studentId, groupId } })
+    .put(
+      ApiConstants.USER_STUDENT_GROUP,
+      {},
+      { params: { studentId, groupId } }
+    )
     .then(({ data }) => data);
 };

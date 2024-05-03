@@ -3,8 +3,10 @@ import { IUser, IUserCreate } from "@/interfaces";
 import { useGroups } from "@/queries/group";
 import {
   useAdminCreate,
+  usePasswordChange,
   useStudentCreate,
   useTeacherCreate,
+  useUsernameChange,
 } from "@/queries/user";
 import {
   Button,
@@ -89,8 +91,20 @@ export default function UserCreateModal({
     },
   });
 
+  const { mutate: changeName, isPending: isChangingName } = useUsernameChange({
+    onSuccess: () => {
+      onClose();
+      toast.success("Ф.И.О изменено");
+      queryClient.invalidateQueries({
+        queryKey: [ApiConstants.USERS_LIST],
+        refetchType: "all",
+      });
+    },
+  });
+
   const handleCreate = () => {
     if (isEdit && user) {
+      changeName({ data: userData, id: user.id });
       return;
     }
 
@@ -185,7 +199,10 @@ export default function UserCreateModal({
                     !isEdit)
                 }
                 isLoading={
-                  isCreatingAdmin || isCreatingStudent || isCreatingTeacher
+                  isCreatingAdmin ||
+                  isCreatingStudent ||
+                  isCreatingTeacher ||
+                  isChangingName
                 }
               >
                 {!isEdit ? "Создать" : "Изменить"}
