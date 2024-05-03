@@ -8,6 +8,7 @@ import SubjectsPage from "@/pages/subject/SubjectsPage";
 import SchedulePage from "@/pages/schedule/SchedulePage";
 import UsersPage from "@/pages/user/UsersPage";
 import TeacherSchedulePage from "@/pages/teacherSchedule/TeacherSchedulePage";
+import DashboardIndex from "@/pages/DashboardIndex";
 
 export default function RootRouter() {
   return (
@@ -16,6 +17,7 @@ export default function RootRouter() {
         <Route path="/" element={<RootLayout />}>
           <Route path="login" element={<Login />} />
           <Route path="dashboard" element={<DashboardLayout />}>
+            <Route index element={<DashboardIndex />} />
             <Route path="group" element={<GroupPage />} />
             <Route path="group/:id/students" element={<GroupStudents />} />
             <Route path="subject" element={<SubjectsPage />} />

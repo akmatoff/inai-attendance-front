@@ -10,12 +10,14 @@ import {
   ListboxItem,
   ListboxSection,
 } from "@nextui-org/react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import Logo from "./Logo";
 import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   const navigate = useNavigate();
+
+  const location = useLocation();
 
   const logout = () => {
     navigate(ROUTES.LOGIN);
@@ -23,6 +25,10 @@ export default function Sidebar() {
     localStorage.removeItem(StorageKeys.ROLE);
     localStorage.removeItem(StorageKeys.USERNAME);
   };
+
+  console.log(location.pathname);
+
+  const isActive = (href: string) => location.pathname === href;
 
   return (
     <div className="flex flex-col justify-between h-screen border-r-2 border-slate-100 fixed">
@@ -39,7 +45,9 @@ export default function Sidebar() {
               {resourcesListSection.map((resource) => (
                 <ListboxItem
                   key={resource.key}
-                  className="px-6 py-3 mb-2"
+                  className={`px-6 py-3 mb-2 ${
+                    isActive(resource.href) ? "bg-primary text-white" : ""
+                  }`}
                   classNames={{ title: "font-semibold" }}
                   startContent={resource.icon}
                   description={resource.description}
@@ -57,7 +65,9 @@ export default function Sidebar() {
             {resourcesActionSection.map((resource) => (
               <ListboxItem
                 key={resource.key}
-                className="px-6 py-3 mb-2"
+                className={`px-6 py-3 mb-2 ${
+                  isActive(resource.href) ? "bg-primary text-white" : ""
+                }`}
                 classNames={{ title: "font-semibold" }}
                 startContent={resource.icon}
                 description={resource.description}
