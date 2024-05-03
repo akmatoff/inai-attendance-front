@@ -110,10 +110,15 @@ export const useUsernameChange = ({
   };
 };
 
-export const usePasswordChange = () => {
+export const usePasswordChange = ({
+  onSuccess,
+  onError,
+}: MutationQueryParams) => {
   const { mutate, isPending } = useMutation({
-    mutationFn: ({ data, id }: { data: IUserCreate; id: number }) =>
-      changeUserPassword(id, data),
+    mutationFn: ({ text, id }: { text: string; id: number }) =>
+      changeUserPassword(id, text),
+    onSuccess,
+    onError,
   });
 
   return {

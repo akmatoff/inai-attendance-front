@@ -3,7 +3,6 @@ import { IUser, IUserCreate } from "@/interfaces";
 import { useGroups } from "@/queries/group";
 import {
   useAdminCreate,
-  usePasswordChange,
   useStudentCreate,
   useTeacherCreate,
   useUsernameChange,

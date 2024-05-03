@@ -14,6 +14,7 @@ import { IUser } from "@/interfaces";
 import { Icons } from "@/components/Icons";
 import { useUsers } from "@/queries/user";
 import UserCreateModal from "./UserCreateModal";
+import ChangePasswordPopover from "./ChangePasswordPopover";
 
 const columns = [
   { key: "id", label: "ID" },
@@ -81,6 +82,14 @@ export function UserRow({ user, columnKey }: { user: IUser; columnKey: Key }) {
               <Icons.EDIT className="text-xl" onClick={onOpen} />
             </span>
           </Tooltip>
+          <ChangePasswordPopover
+            userId={user.id}
+            trigger={
+              <span className="cursor-pointer">
+                <Icons.PASSWORD className="text-xl" />
+              </span>
+            }
+          />
 
           <UserCreateModal
             isEdit

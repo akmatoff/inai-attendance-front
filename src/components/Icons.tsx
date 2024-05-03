@@ -4,7 +4,7 @@ import { PiBooksFill, PiUserListFill } from "react-icons/pi";
 import { BiSolidCalendarAlt, BiSolidCalendarCheck } from "react-icons/bi";
 import { MdOutlineModeEditOutline } from "react-icons/md";
 import { IoMdAdd, IoIosArrowBack } from "react-icons/io";
-import { RiUser5Fill } from "react-icons/ri";
+import { RiUser5Fill, RiLockPasswordLine } from "react-icons/ri";
 import { GrFormTrash } from "react-icons/gr";
 
 export const Icons = {
@@ -29,4 +29,7 @@ export const Icons = {
     <IoIosArrowBack {...props} />
   ),
   DELETE: (props: HTMLAttributes<SVGElement>) => <GrFormTrash {...props} />,
+  PASSWORD: (props: HTMLAttributes<SVGElement>) => (
+    <RiLockPasswordLine {...props} />
+  ),
 };

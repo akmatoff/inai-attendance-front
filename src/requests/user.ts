@@ -38,9 +38,9 @@ export const changeUsername = async (id: number, data: IUserCreate) => {
     .then(({ data }) => data);
 };
 
-export const changeUserPassword = async (id: number, data: IUserCreate) => {
+export const changeUserPassword = async (id: number, text: string) => {
   return request
-    .put(ApiConstants.USER_PASSWORD, data, { params: { id } })
+    .put(ApiConstants.USER_PASSWORD, { text }, { params: { id } })
     .then(({ data }) => data);
 };
 
