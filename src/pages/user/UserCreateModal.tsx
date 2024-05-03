@@ -126,7 +126,8 @@ export default function UserCreateModal({
     if (groups && !isEdit && !user) {
       setUserData({ ...userData, groupId: groups[0].id });
     }
-  }, [groups, userData, user, isEdit]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [groups]);
 
   return (
     <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
