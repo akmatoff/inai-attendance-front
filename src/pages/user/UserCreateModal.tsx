@@ -19,7 +19,7 @@ import {
   SelectItem,
 } from "@nextui-org/react";
 import { useQueryClient } from "@tanstack/react-query";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 
 interface Props {
@@ -121,6 +121,12 @@ export default function UserCreateModal({
         return;
     }
   };
+
+  useEffect(() => {
+    if (groups && !isEdit && !user) {
+      setUserData({ ...userData, groupId: groups[0].id });
+    }
+  }, [groups, userData, user, isEdit]);
 
   return (
     <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
