@@ -19,10 +19,14 @@ export const useTeachers = () => {
   };
 };
 
-export const useTeacherClassesForToday = (teacherId: number) => {
+export const useTeacherClassesForToday = (
+  teacherId: number,
+  enabled: boolean = true
+) => {
   const { data, isLoading } = useQuery({
     queryFn: () => getTeacherClassesForToday(teacherId),
     queryKey: [ApiConstants.TEACHER_CLASSES_TODAY, teacherId],
+    enabled,
   });
 
   return {

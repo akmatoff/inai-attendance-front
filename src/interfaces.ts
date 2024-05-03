@@ -35,6 +35,13 @@ export interface ITeacher {
   name: string;
 }
 
+export interface ITeacherClassesForToday {
+  subjectScheduleId: number;
+  subjectName: string;
+  groupName: string;
+  classTime: string;
+}
+
 export interface IUserCreate {
   firstName: string;
   lastName: string;

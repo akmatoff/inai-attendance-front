@@ -1,6 +1,6 @@
 import Resource from "@/components/Resource";
-import { useSchedules } from "@/queries/subject";
 import {
+  Image,
   Table,
   TableBody,
   TableCell,
@@ -10,9 +10,13 @@ import {
   Tooltip,
   useDisclosure,
 } from "@nextui-org/react";
-import { Key } from "react";
-import { ISchedule } from "@/interfaces";
+import { Key, useState } from "react";
+import { ITeacherClassesForToday } from "@/interfaces";
 import { Icons } from "@/components/Icons";
+import { useTeacherClassesForToday } from "@/queries/teacher";
+import { StorageKeys } from "@/constants/storageKeys";
+import { generateQrCode } from "@/requests/class";
+import QrCodeModal from "./QrCodeModal";
 
 const columns = [
   { key: "subjectScheduleId", label: "ID" },
@@ -23,9 +27,12 @@ const columns = [
 ];
 
 export default function TeacherSchedulePage() {
-  const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
+  const userId = Number(localStorage.getItem(StorageKeys.USER_ID));
 
-  const { data: schedules, isLoading } = useSchedules();
+  const { data: schedules, isLoading } = useTeacherClassesForToday(
+    userId,
+    !!userId
+  );
 
   return (
     <Resource title="Список моих пар на сегодня">
@@ -37,7 +44,7 @@ export default function TeacherSchedulePage() {
         </TableHeader>
         <TableBody
           items={schedules || []}
-          emptyContent="Нет существующих пар."
+          emptyContent="Нет пар на сегодня."
           isLoading={isLoading}
         >
           {(schedule) => (
@@ -59,16 +66,39 @@ function ScheduleRow({
   schedule,
   columnKey,
 }: {
-  schedule: ISchedule;
+  schedule: ITeacherClassesForToday;
   columnKey: Key;
 }) {
-  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-  const cellValue = schedule[columnKey as keyof ISchedule];
+  const cellValue = schedule[columnKey as keyof ITeacherClassesForToday];
+
+  const [qrCode, setQrCode] = useState("");
+
+  const handleQrCode = () => {
+    generateQrCode(schedule.subjectScheduleId).then((data) => {
+      setQrCode(URL.createObjectURL(data));
+      onOpen();
+    });
+  };
 
   switch (columnKey) {
     case "actions":
-      return <div className="flex relative gap-3"></div>;
+      return (
+        <div className="flex relative gap-3">
+          <Tooltip content="Сгенерировать QR-код">
+            <span className="cursor-pointer">
+              <Icons.QR_CODE className="text-xl" onClick={handleQrCode} />
+            </span>
+          </Tooltip>
+
+          {qrCode && (
+            <QrCodeModal isOpen={isOpen} onOpenChange={onOpenChange}>
+              <Image width="100%" src={qrCode} alt="QR-Code" />
+            </QrCodeModal>
+          )}
+        </div>
+      );
     default:
       return cellValue;
   }

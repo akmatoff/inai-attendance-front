@@ -2,7 +2,7 @@ import { login } from "@/requests/auth";
 import { useMutation } from "@tanstack/react-query";
 
 interface MutationQuery {
-  onSuccess?: (data: { token: string; role: string }) => void;
+  onSuccess?: (data: { token: string; role: string; userId: number }) => void;
   onError?: () => void;
 }
 

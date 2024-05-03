@@ -46,6 +46,7 @@ export default function Login() {
         StorageKeys.USERNAME,
         loginForm.getValues("username")
       );
+      localStorage.setItem(StorageKeys.USER_ID, data.userId.toString());
       toast.success("Авторизация успешна!");
     },
     onError: () => {

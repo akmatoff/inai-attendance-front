@@ -11,6 +11,7 @@ import {
 } from "react-icons/io";
 import { RiUser5Fill, RiLockPasswordLine } from "react-icons/ri";
 import { GrFormTrash } from "react-icons/gr";
+import { IoQrCode } from "react-icons/io5";
 
 export const Icons = {
   GROUP: (props: HTMLAttributes<SVGElement>) => <FaUserGroup {...props} />,
@@ -44,4 +45,5 @@ export const Icons = {
   CHECKMARK_CIRCLE: (props: HTMLAttributes<SVGElement>) => (
     <IoIosCheckmarkCircle {...props} />
   ),
+  QR_CODE: (props: HTMLAttributes<SVGElement>) => <IoQrCode {...props} />,
 };
