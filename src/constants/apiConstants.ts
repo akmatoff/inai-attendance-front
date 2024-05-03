@@ -22,6 +22,7 @@ export class ApiConstants {
   static ROLES_LIST = this.API_URL.concat("/options/roles");
   static CLASS_TIMES_LIST = this.API_URL.concat("/options/class-times");
   static CLASS_DAYS_LIST = this.API_URL.concat("/options/class-days");
+  static SCHEDULES_LIST = this.API_URL.concat("/options/subject-schedules");
 
   static ATTENDANCE = this.API_URL.concat("/attendance");
 

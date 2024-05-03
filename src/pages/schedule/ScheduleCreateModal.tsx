@@ -1,16 +1,11 @@
 import { ApiConstants } from "@/constants/apiConstants";
-import { IGroup, ISchedule } from "@/interfaces";
+import { ISchedule } from "@/interfaces";
 import { useClassDays, useClassTimes } from "@/queries/class";
-import {
-  useGroupCreation,
-  useGroupNameChange,
-  useGroups,
-} from "@/queries/group";
+import { useGroups } from "@/queries/group";
 import { useScheduleMutation, useSubjects } from "@/queries/subject";
 import { useTeachers } from "@/queries/teacher";
 import {
   Button,
-  Input,
   Modal,
   ModalBody,
   ModalContent,
@@ -52,44 +47,82 @@ export default function ScheduleCreateModal({
   const [teacherId, setTeacherId] = useState<number | undefined>();
   const [subjectId, setSubjectId] = useState<number | undefined>();
 
-  const { mutate: create, isPending: isCreating } = useScheduleMutation({
+  const { mutate, isPending: isCreating } = useScheduleMutation({
     onSuccess: () => {
       onClose();
-      toast.success("Пара создана успешно");
-      //   queryClient.invalidateQueries({
-      // queryKey: [ApiConstants.],
-      //     refetchType: "all",
-      //   });
+      toast.success("Успешно");
+      queryClient.invalidateQueries({
+        queryKey: [ApiConstants.SCHEDULES_LIST],
+        refetchType: "all",
+      });
     },
   });
 
   const handleCreate = () => {
     if (classTimeId && classDayId && groupId && teacherId && subjectId) {
-      create({
+      if (schedule && isEdit) {
+        mutate({
+          id: schedule.subjectScheduleId,
+          data: { classTimeId, classDayId, groupId, teacherId, subjectId },
+        });
+        return;
+      }
+
+      mutate({
         data: { classTimeId, classDayId, groupId, teacherId, subjectId },
       });
     }
   };
 
   useEffect(() => {
+    if (schedule) {
+      setClassTimeId(
+        classTimes?.find((classTime) => classTime.time === schedule.classTime)
+          ?.id
+      );
+      return;
+    }
     setClassTimeId(classTimes?.[0].id);
-  }, [classTimes]);
+  }, [classTimes, schedule]);
 
   useEffect(() => {
+    if (schedule) {
+      setClassDayId(
+        classDays?.find((classDay) => classDay.name === schedule.classDay)?.id
+      );
+      return;
+    }
+
     setClassDayId(classDays?.[0].id);
-  }, [classDays]);
+  }, [classDays, schedule]);
 
   useEffect(() => {
+    if (schedule) {
+      setGroupId(schedule.groupId);
+      return;
+    }
     setGroupId(groups?.[0].id);
-  }, [groups]);
+  }, [groups, schedule]);
 
   useEffect(() => {
+    if (schedule) {
+      setTeacherId(
+        teachers?.find((teacher) => teacher.name === schedule.teacher)?.id
+      );
+      return;
+    }
     setTeacherId(teachers?.[0].id);
-  }, [teachers]);
+  }, [teachers, schedule]);
 
   useEffect(() => {
+    if (schedule) {
+      setSubjectId(
+        subjects?.find((subject) => subject.name === schedule.subjectName)?.id
+      );
+      return;
+    }
     setSubjectId(subjects?.[0].id);
-  }, [subjects]);
+  }, [subjects, schedule]);
 
   return (
     <Modal isOpen={isOpen} onOpenChange={onOpenChange}>

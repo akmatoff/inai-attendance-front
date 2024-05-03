@@ -1,4 +1,9 @@
-import { ISchedule, ISubject, ISubjectCreate } from "@/interfaces";
+import {
+  ISchedule,
+  IScheduleCreate,
+  ISubject,
+  ISubjectCreate,
+} from "@/interfaces";
 import { request } from "./request";
 import { ApiConstants } from "@/constants/apiConstants";
 
@@ -19,12 +24,19 @@ export const updateSubject = async (
     .then(({ data }) => data);
 };
 
-export const createSubjectSchedule = async (data: ISchedule) => {
+export const createSubjectSchedule = async (data: IScheduleCreate) => {
   return request.post(ApiConstants.SCHEDULE, data).then(({ data }) => data);
 };
 
-export const updateSubjectSchedule = async (id: number, data: ISchedule) => {
+export const updateSubjectSchedule = async (
+  id: number,
+  data: IScheduleCreate
+) => {
   return request
-    .put(ApiConstants.SCHEDULE, { data, params: { id } })
+    .put(ApiConstants.SCHEDULE, data, { params: { id } })
     .then(({ data }) => data);
+};
+
+export const getSchedules = async (): Promise<ISchedule[]> => {
+  return request.get(ApiConstants.SCHEDULES_LIST).then(({ data }) => data);
 };

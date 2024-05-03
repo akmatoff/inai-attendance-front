@@ -54,12 +54,22 @@ export interface ISubjectCreate {
   semester: number;
 }
 
-export interface ISchedule {
+export interface IScheduleCreate {
   classTimeId: number;
   subjectId: number;
   groupId: number;
   teacherId: number;
   classDayId: number;
+}
+
+export interface ISchedule {
+  classTime: string;
+  classDay: string;
+  subjectName: string;
+  subjectScheduleId: number;
+  teacher: string;
+  groupName: string;
+  groupId: number;
 }
 
 export interface IClassTime {
