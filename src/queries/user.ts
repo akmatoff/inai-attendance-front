@@ -1,4 +1,5 @@
-import { IUserCreate } from "@/interfaces";
+import { ApiConstants } from "@/constants/apiConstants";
+import { IUserCreate, MutationQueryParams } from "@/interfaces";
 import {
   activateUser,
   changeStudentGroup,
@@ -8,13 +9,31 @@ import {
   createStudent,
   createTeacher,
   deactivateUser,
+  getUsers,
 } from "@/requests/user";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
-export const useStudentCreate = () => {
+export const useUsers = () => {
+  const { data, isLoading } = useQuery({
+    queryFn: getUsers,
+    queryKey: [ApiConstants.USERS_LIST],
+  });
+
+  return {
+    data,
+    isLoading,
+  };
+};
+
+export const useStudentCreate = ({
+  onSuccess,
+  onError,
+}: MutationQueryParams) => {
   const { mutate, isPending } = useMutation({
     mutationFn: ({ groupId, data }: { data: IUserCreate; groupId: number }) =>
       createStudent(groupId, data),
+    onSuccess,
+    onError,
   });
 
   return {
@@ -23,9 +42,14 @@ export const useStudentCreate = () => {
   };
 };
 
-export const useTeacherCreate = () => {
+export const useTeacherCreate = ({
+  onSuccess,
+  onError,
+}: MutationQueryParams) => {
   const { mutate, isPending } = useMutation({
     mutationFn: (data: IUserCreate) => createTeacher(data),
+    onSuccess,
+    onError,
   });
 
   return {
@@ -34,9 +58,11 @@ export const useTeacherCreate = () => {
   };
 };
 
-export const useAdminCreate = () => {
+export const useAdminCreate = ({ onSuccess, onError }: MutationQueryParams) => {
   const { mutate, isPending } = useMutation({
     mutationFn: (data: IUserCreate) => createAdmin(data),
+    onSuccess,
+    onError,
   });
 
   return {

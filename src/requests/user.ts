@@ -1,10 +1,14 @@
 import { ApiConstants } from "@/constants/apiConstants";
 import { request } from "./request";
-import { IUserCreate } from "@/interfaces";
+import { IUser, IUserCreate } from "@/interfaces";
+
+export const getUsers = async (): Promise<IUser[]> => {
+  return request.get(ApiConstants.USERS_LIST).then(({ data }) => data);
+};
 
 export const createStudent = async (groupId: number, data: IUserCreate) => {
   return request
-    .post(ApiConstants.USER_STUDENT, { data, params: { groupId } })
+    .post(ApiConstants.USER_STUDENT, data, { params: { groupId } })
     .then(({ data }) => data);
 };
 

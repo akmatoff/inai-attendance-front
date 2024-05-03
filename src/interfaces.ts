@@ -39,6 +39,7 @@ export interface IUserCreate {
   firstName: string;
   lastName: string;
   middleName: string;
+  groupId?: number;
 }
 
 export interface ISubject {
@@ -89,4 +90,13 @@ export interface IRole {
 export interface MutationQueryParams {
   onSuccess?: () => void;
   onError?: () => void;
+}
+
+export interface IUser {
+  id: number;
+  name: string;
+  username: string;
+  password: string;
+  role: string;
+  group: string;
 }

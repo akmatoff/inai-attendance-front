@@ -25,7 +25,7 @@ export default function Sidebar() {
   };
 
   return (
-    <div className="flex flex-col justify-between flex-[1_1_0%] h-screen border-r-2 border-slate-100">
+    <div className="flex flex-col justify-between h-screen border-r-2 border-slate-100 fixed">
       <div>
         <div className="p-4 border-b-1">
           <Link to={ROUTES.DASHBOARD}>

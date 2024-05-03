@@ -23,11 +23,11 @@ export default function DashboardLayout() {
   }, [navigate, isAuthenticated]);
 
   return (
-    <section className="flex flex-col w-screen min-h-screen">
-      <div className="flex w-full min-h-full">
+    <section className="flex flex-col min-h-screen w-screen">
+      <div className="flex min-h-full w-full">
         <Sidebar />
 
-        <div className="flex-[5_1_25%] overflow-y-scroll">
+        <div className="flex-[5_1_25%] ml-56">
           <Navbar
             position="sticky"
             className="px-1 justify-between"
@@ -56,7 +56,7 @@ export default function DashboardLayout() {
             </NavbarContent>
           </Navbar>
 
-          <div className="flex flex-col justify-center items-center w-full p-20">
+          <div className="flex flex-col px-4 py-6 md:px-10 lg:px-20 overflow-x-hidden">
             <Outlet />
           </div>
         </div>

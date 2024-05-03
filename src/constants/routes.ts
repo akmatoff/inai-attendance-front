@@ -1,6 +1,7 @@
 export const ROUTES = {
   HOME: "/",
   DASHBOARD: "/dashboard",
+  USERS: "/dashboard/user",
   GROUP: "/dashboard/group",
   GROUP_STUDENTS: (groupId: number) => `/dashboard/group/${groupId}/students`,
   STUDENT: "/dashboard/student",
