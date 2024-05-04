@@ -2,7 +2,7 @@ import { Icons } from "@/components/Icons";
 import { IResource } from "@/interfaces";
 import { ROUTES } from "./routes";
 
-export const resourcesListSection: IResource[] = [
+export const resourcesAdminSection: IResource[] = [
   {
     key: "users",
     label: "Пользователи",
@@ -35,7 +35,7 @@ export const resourcesListSection: IResource[] = [
   },
 ];
 
-export const resourcesActionSection: IResource[] = [
+export const resourcesTeacherSection: IResource[] = [
   {
     key: "attendance",
     label: "Посещаемость",
@@ -50,7 +50,7 @@ export const resourcesActionSection: IResource[] = [
     description: "Список пар на сегодня",
 
     href: ROUTES.TEACHER_SCHEDULE,
-    icon: <Icons.CALENDAR />,
+    icon: <Icons.TODAY className="text-xl" />,
   },
   {
     key: "schedule-for-week",
@@ -59,5 +59,12 @@ export const resourcesActionSection: IResource[] = [
 
     href: ROUTES.TEACHER_SCHEDULE_FOR_WEEK,
     icon: <Icons.CALENDAR />,
+  },
+  {
+    key: "groups",
+    label: "Группы",
+    description: "Список групп",
+    href: ROUTES.GROUP,
+    icon: <Icons.GROUP />,
   },
 ];

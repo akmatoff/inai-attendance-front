@@ -11,12 +11,13 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import GroupCreateModal from "./GroupCreateModal";
-import { Key } from "react";
+import { Key, useMemo } from "react";
 import { IGroup } from "@/interfaces";
 import { Icons } from "@/components/Icons";
 import AddStudentModal from "./AddStudentModal";
 import { useNavigate } from "react-router";
 import { ROUTES } from "@/constants/routes";
+import { StorageKeys } from "@/constants/storageKeys";
 
 const columns = [
   { key: "id", label: "ID" },
@@ -82,24 +83,33 @@ export function GroupRow({
 
   const cellValue = group[columnKey as keyof IGroup];
 
+  const isAdmin = useMemo(
+    () => localStorage.getItem(StorageKeys.ROLE) === "ADMIN",
+    []
+  );
+
   switch (columnKey) {
     case "actions":
       return (
         <div className="flex relative items-center gap-3">
-          <Tooltip content="Изменить название">
-            <span className="cursor-pointer" onClick={onOpen}>
-              <Icons.EDIT className="text-xl" />
-            </span>
-          </Tooltip>
+          {isAdmin && (
+            <Tooltip content="Изменить название">
+              <span className="cursor-pointer" onClick={onOpen}>
+                <Icons.EDIT className="text-xl" />
+              </span>
+            </Tooltip>
+          )}
 
-          <Tooltip content="Добавить студента">
-            <span className="cursor-pointer">
-              <Icons.ADD
-                className="text-xl text-success"
-                onClick={onAddStudentOpen}
-              />
-            </span>
-          </Tooltip>
+          {isAdmin && (
+            <Tooltip content="Добавить студента">
+              <span className="cursor-pointer">
+                <Icons.ADD
+                  className="text-xl text-success"
+                  onClick={onAddStudentOpen}
+                />
+              </span>
+            </Tooltip>
+          )}
 
           <Tooltip content="Получить список студентов">
             <span className="cursor-pointer">

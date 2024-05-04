@@ -2,6 +2,7 @@ import ConfirmModal from "@/components/ConfirmModal";
 import { Icons } from "@/components/Icons";
 import Resource from "@/components/Resource";
 import { ApiConstants } from "@/constants/apiConstants";
+import { StorageKeys } from "@/constants/storageKeys";
 import { IGroupStudent } from "@/interfaces";
 import { useGroupStudentRemove, useGroupStudents } from "@/queries/group";
 import {
@@ -80,6 +81,8 @@ function StudentRow({
 }) {
   const cellValue = student[columnKey as keyof IGroupStudent];
 
+  const isAdmin = localStorage.getItem(StorageKeys.ROLE) === "ADMIN";
+
   const { id } = useParams();
 
   const queryClient = useQueryClient();
@@ -110,20 +113,33 @@ function StudentRow({
     case "actions":
       return (
         <div className="flex relative items-center gap-3">
-          <Tooltip content="Удалить студента из группы">
+          {isAdmin && (
+            <Tooltip content="Удалить студента из группы">
+              <span className="cursor-pointer">
+                <Icons.DELETE
+                  className="text-2xl text-danger"
+                  onClick={onOpen}
+                />
+              </span>
+            </Tooltip>
+          )}
+
+          <Tooltip content="Получить список пар студента">
             <span className="cursor-pointer">
-              <Icons.DELETE className="text-2xl text-danger" onClick={onOpen} />
+              <Icons.CALENDAR className="text-xl" />
             </span>
           </Tooltip>
 
-          <ConfirmModal
-            title="Удаление студента из группы"
-            description="Вы уверены, что хотите удалить данного студента?"
-            isOpen={isOpen}
-            onOpenChange={onOpenChange}
-            onConfirm={handleDelete}
-            isLoading={isPending}
-          />
+          {isAdmin && (
+            <ConfirmModal
+              title="Удаление студента из группы"
+              description="Вы уверены, что хотите удалить данного студента?"
+              isOpen={isOpen}
+              onOpenChange={onOpenChange}
+              onConfirm={handleDelete}
+              isLoading={isPending}
+            />
+          )}
         </div>
       );
     default:

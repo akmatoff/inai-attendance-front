@@ -1,6 +1,6 @@
 import {
-  resourcesListSection,
-  resourcesActionSection,
+  resourcesAdminSection,
+  resourcesTeacherSection,
 } from "@/constants/resources";
 import { ROUTES } from "@/constants/routes";
 import { StorageKeys } from "@/constants/storageKeys";
@@ -28,6 +28,17 @@ export default function Sidebar() {
 
   const isActive = (href: string) => location.pathname === href;
 
+  const filteredTeacherSection = resourcesTeacherSection.filter((item) => {
+    if (
+      item.key === "groups" &&
+      localStorage.getItem(StorageKeys.ROLE) === "ADMIN"
+    ) {
+      return false;
+    }
+
+    return true;
+  });
+
   return (
     <div className="flex flex-col justify-between h-screen border-r-2 border-slate-100 fixed">
       <div>
@@ -40,7 +51,7 @@ export default function Sidebar() {
         {localStorage.getItem(StorageKeys.ROLE) === "ADMIN" ? (
           <Listbox aria-label="Ресурсы">
             <ListboxSection title="Администрация" showDivider>
-              {resourcesListSection.map((resource) => (
+              {resourcesAdminSection.map((resource) => (
                 <ListboxItem
                   key={resource.key}
                   className={`px-6 py-3 mb-2 ${
@@ -60,7 +71,7 @@ export default function Sidebar() {
 
         <Listbox aria-label="Преподаватель">
           <ListboxSection title="Преподаватель">
-            {resourcesActionSection.map((resource) => (
+            {filteredTeacherSection.map((resource) => (
               <ListboxItem
                 key={resource.key}
                 className={`px-6 py-3 mb-2 ${
