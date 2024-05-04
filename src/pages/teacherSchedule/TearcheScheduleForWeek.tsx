@@ -44,7 +44,7 @@ export default function TeacherScheduleForWeek() {
   return (
     <Resource title="Список моих пар на неделю">
       {mappedSchedules.map((scheduleWeek) => (
-        <>
+        <div key={scheduleWeek.weekDay} className="flex flex-col gap-4">
           <h1 className="font-semibold">{scheduleWeek.weekDay}</h1>
           <Table aria-label="Пары" classNames={{ tr: "h-10" }}>
             <TableHeader columns={columns}>
@@ -66,7 +66,7 @@ export default function TeacherScheduleForWeek() {
               )}
             </TableBody>
           </Table>
-        </>
+        </div>
       ))}
     </Resource>
   );

@@ -37,14 +37,6 @@ export const resourcesAdminSection: IResource[] = [
 
 export const resourcesTeacherSection: IResource[] = [
   {
-    key: "attendance",
-    label: "Посещаемость",
-    description: "Учет посещаемости",
-
-    href: "/attendance",
-    icon: <Icons.CALENDAR_CHECKED />,
-  },
-  {
     key: "schedule-today",
     label: "Сегодня",
     description: "Список пар на сегодня",

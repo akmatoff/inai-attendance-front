@@ -30,8 +30,14 @@ export default function GroupPage() {
 
   const { data: groups, isLoading } = useGroups();
 
+  const isAdmin = localStorage.getItem(StorageKeys.ROLE) === "ADMIN";
+
   return (
-    <Resource title="Группы" buttonText="Создать группу" onButtonClick={onOpen}>
+    <Resource
+      title="Группы"
+      buttonText="Создать группу"
+      onButtonClick={isAdmin ? onOpen : undefined}
+    >
       <Table aria-label="Группы" classNames={{ tr: "h-14" }}>
         <TableHeader columns={columns}>
           {(column) => (
@@ -116,6 +122,15 @@ export function GroupRow({
               <Icons.USER_LIST
                 className="text-xl"
                 onClick={() => navigate(ROUTES.GROUP_STUDENTS(group.id))}
+              />
+            </span>
+          </Tooltip>
+
+          <Tooltip content="Получить статистику посещаемости студента">
+            <span className="cursor-pointer">
+              <Icons.CALENDAR_CHECKED
+                className="text-xl"
+                onClick={() => navigate(ROUTES.ATTENDANCE_STATS(group.id))}
               />
             </span>
           </Tooltip>

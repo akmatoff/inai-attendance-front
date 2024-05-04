@@ -25,7 +25,8 @@ export class ApiConstants {
   static SCHEDULES_LIST = this.API_URL.concat("/options/subject-schedules");
   static USERS_LIST = this.API_URL.concat("/options/users");
 
-  static ATTENDANCE = this.API_URL.concat("/attendance");
+  static ATTENDANCE_STATS_DESC = this.API_URL.concat("/statistics/score/desc");
+  static ATTENDANCE_STATS_ASC = this.API_URL.concat("/statistics/score/asc");
 
   static USER = this.API_URL.concat("/user");
   static USER_TEACHER = this.USER.concat("/teacher");

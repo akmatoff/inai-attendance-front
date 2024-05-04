@@ -4,6 +4,8 @@ export const ROUTES = {
   USERS: "/dashboard/user",
   GROUP: "/dashboard/group",
   GROUP_STUDENTS: (groupId: number) => `/dashboard/group/${groupId}/students`,
+  ATTENDANCE_STATS: (groupId: number) =>
+    `/dashboard/group/${groupId}/attendance-stats`,
   STUDENT: "/dashboard/student",
   SUBJECT: "/dashboard/subject",
   SCHEDULE: "/dashboard/schedule",
