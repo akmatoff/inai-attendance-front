@@ -36,7 +36,15 @@ export default function ChangeGroupModal({
     onSuccess: () => {
       onClose();
       toast.success("Группа изменена успешно");
-      queryClient.invalidateQueries({ queryKey: [ApiConstants.USERS_LIST] });
+      queryClient.invalidateQueries({
+        queryKey: [ApiConstants.USERS_LIST],
+        refetchType: "all",
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: [ApiConstants.GROUP],
+        refetchType: "all",
+      });
     },
   });
 
