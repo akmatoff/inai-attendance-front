@@ -9,18 +9,24 @@ import {
 import { ReactNode } from "react";
 
 interface Props {
+  title: string;
   isOpen: boolean;
   onOpenChange: (isOpen: boolean) => void;
   children?: ReactNode;
 }
 
-export default function QrCodeModal({ isOpen, onOpenChange, children }: Props) {
+export default function CustomModal({
+  title,
+  isOpen,
+  onOpenChange,
+  children,
+}: Props) {
   return (
     <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
       <ModalContent>
         {(onClose) => (
           <>
-            <ModalHeader>QR-код</ModalHeader>
+            <ModalHeader>{title}</ModalHeader>
             <ModalBody>{children}</ModalBody>
             <ModalFooter>
               <Button color="primary" onPress={onClose}>

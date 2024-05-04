@@ -2,8 +2,6 @@ import Resource from "@/components/Resource";
 import { useAttendanceStats } from "@/queries/stats";
 import {
   Button,
-  Card,
-  CardBody,
   Checkbox,
   DateRangePicker,
   getKeyValue,
@@ -41,7 +39,7 @@ export default function AttendancePage() {
   const [subjectId, setSubjectId] = useState<number>();
   const [isSortByName, setIsSortByName] = useState(false);
 
-  const { data: subjects, isLoading: isLoadingSubjects } = useSubjects();
+  const { data: subjects } = useSubjects();
 
   const { data: students, isLoading } = useAttendanceStats({
     sort,

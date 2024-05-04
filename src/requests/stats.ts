@@ -33,3 +33,11 @@ export const getAttendanceStats = async ({
     )
     .then(({ data }) => data);
 };
+
+export const getTodayAttendance = async (
+  subjectScheduleId: number
+): Promise<string[]> => {
+  return request
+    .get(ApiConstants.ATTENDANCE_TODAY_CLASS, { params: { subjectScheduleId } })
+    .then(({ data }) => data);
+};

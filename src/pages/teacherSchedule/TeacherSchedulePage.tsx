@@ -1,6 +1,9 @@
 import Resource from "@/components/Resource";
 import {
   Image,
+  Listbox,
+  ListboxItem,
+  Spinner,
   Table,
   TableBody,
   TableCell,
@@ -16,7 +19,8 @@ import { Icons } from "@/components/Icons";
 import { useTeacherClassesForToday } from "@/queries/teacher";
 import { StorageKeys } from "@/constants/storageKeys";
 import { generateQrCode } from "@/requests/class";
-import QrCodeModal from "./QrCodeModal";
+import CustomModal from "./CustomModal";
+import { useTodayAttendance } from "@/queries/stats";
 
 const columns = [
   { key: "subjectScheduleId", label: "ID" },
@@ -70,6 +74,11 @@ function ScheduleRow({
   columnKey: Key;
 }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const {
+    isOpen: isAttendanceOpen,
+    onOpen: onAttendanceOpen,
+    onOpenChange: onAttendanceOpenChange,
+  } = useDisclosure();
 
   const cellValue = schedule[columnKey as keyof ITeacherClassesForToday];
 
@@ -82,6 +91,11 @@ function ScheduleRow({
     });
   };
 
+  const { data: todayAttendance, isLoading } = useTodayAttendance(
+    schedule.subjectScheduleId,
+    isAttendanceOpen
+  );
+
   switch (columnKey) {
     case "actions":
       return (
@@ -92,10 +106,36 @@ function ScheduleRow({
             </span>
           </Tooltip>
 
+          <Tooltip content="Список присутствующих на сегодняшней паре">
+            <span className="cursor-pointer">
+              <Icons.CHECKMARK_CIRCLE
+                className="text-xl"
+                onClick={onAttendanceOpen}
+              />
+            </span>
+          </Tooltip>
+
+          <CustomModal
+            title="Список присутствующих на сегодняшней паре"
+            isOpen={isAttendanceOpen}
+            onOpenChange={onAttendanceOpenChange}
+          >
+            {!isLoading && (
+              <Listbox items={todayAttendance || []}>
+                {(item) => <ListboxItem key={item}>{item}</ListboxItem>}
+              </Listbox>
+            )}
+            {isLoading && <Spinner />}
+          </CustomModal>
+
           {qrCode && (
-            <QrCodeModal isOpen={isOpen} onOpenChange={onOpenChange}>
+            <CustomModal
+              title="QR-код"
+              isOpen={isOpen}
+              onOpenChange={onOpenChange}
+            >
               <Image width="100%" src={qrCode} alt="QR-Code" />
-            </QrCodeModal>
+            </CustomModal>
           )}
         </div>
       );

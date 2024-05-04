@@ -36,6 +36,8 @@ export class ApiConstants {
     "/statistics/name/subject"
   );
 
+  static ATTENDANCE_TODAY_CLASS = this.API_URL.concat("/attendance");
+
   static USER = this.API_URL.concat("/user");
   static USER_TEACHER = this.USER.concat("/teacher");
   static USER_STUDENT = this.USER.concat("/student");

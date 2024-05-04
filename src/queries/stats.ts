@@ -1,5 +1,5 @@
 import { ApiConstants } from "@/constants/apiConstants";
-import { getAttendanceStats } from "@/requests/stats";
+import { getAttendanceStats, getTodayAttendance } from "@/requests/stats";
 import { useQuery } from "@tanstack/react-query";
 
 export interface StatsParams {
@@ -37,6 +37,22 @@ export const useAttendanceStats = ({
     ],
     queryFn: () =>
       getAttendanceStats({ sort, groupId, from, till, subjectId, name }),
+  });
+
+  return {
+    data,
+    isLoading,
+  };
+};
+
+export const useTodayAttendance = (
+  subjectScheduleId: number,
+  enabled: boolean
+) => {
+  const { data, isLoading } = useQuery({
+    queryKey: [ApiConstants.ATTENDANCE_TODAY_CLASS],
+    queryFn: () => getTodayAttendance(subjectScheduleId),
+    enabled,
   });
 
   return {
