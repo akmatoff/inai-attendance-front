@@ -27,6 +27,14 @@ export class ApiConstants {
 
   static ATTENDANCE_STATS_DESC = this.API_URL.concat("/statistics/score/desc");
   static ATTENDANCE_STATS_ASC = this.API_URL.concat("/statistics/score/asc");
+  static ATTENDANCE_STATS_DESC_SUBJECT =
+    this.ATTENDANCE_STATS_DESC.concat("/subject");
+  static ATTENDANCE_STATS_ASC_SUBJECT =
+    this.ATTENDANCE_STATS_ASC.concat("/subject");
+  static ATTENDANCE_STATS_NAME = this.API_URL.concat("/statistics/name");
+  static ATTENDANCE_STATS_NAME_SUBJECT = this.API_URL.concat(
+    "/statistics/name/subject"
+  );
 
   static USER = this.API_URL.concat("/user");
   static USER_TEACHER = this.USER.concat("/teacher");

@@ -124,12 +124,6 @@ function StudentRow({
             </Tooltip>
           )}
 
-          <Tooltip content="Получить список пар студента">
-            <span className="cursor-pointer">
-              <Icons.CALENDAR className="text-xl" />
-            </span>
-          </Tooltip>
-
           {isAdmin && (
             <ConfirmModal
               title="Удаление студента из группы"

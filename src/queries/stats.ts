@@ -7,6 +7,8 @@ export interface StatsParams {
   groupId: number;
   from: string;
   till: string;
+  subjectId?: number;
+  name?: boolean;
 }
 
 export const useAttendanceStats = ({
@@ -14,6 +16,8 @@ export const useAttendanceStats = ({
   groupId,
   from,
   till,
+  subjectId,
+  name,
 }: StatsParams) => {
   const KEY = {
     asc: ApiConstants.ATTENDANCE_STATS_ASC,
@@ -21,8 +25,18 @@ export const useAttendanceStats = ({
   };
 
   const { data, isLoading } = useQuery({
-    queryKey: [KEY[sort]],
-    queryFn: () => getAttendanceStats({ sort, groupId, from, till }),
+    queryKey: [
+      KEY[sort],
+      ApiConstants.ATTENDANCE_STATS_NAME,
+      ApiConstants.ATTENDANCE_STATS_NAME_SUBJECT,
+      groupId,
+      from,
+      till,
+      subjectId,
+      name,
+    ],
+    queryFn: () =>
+      getAttendanceStats({ sort, groupId, from, till, subjectId, name }),
   });
 
   return {

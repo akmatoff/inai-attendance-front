@@ -126,7 +126,7 @@ export function GroupRow({
             </span>
           </Tooltip>
 
-          <Tooltip content="Получить статистику посещаемости студента">
+          <Tooltip content="Получить статистику посещаемости студентов">
             <span className="cursor-pointer">
               <Icons.CALENDAR_CHECKED
                 className="text-xl"

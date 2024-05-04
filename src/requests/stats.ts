@@ -8,13 +8,28 @@ export const getAttendanceStats = async ({
   groupId,
   from,
   till,
+  subjectId,
+  name,
 }: StatsParams): Promise<IStudent[]> => {
   const URL = {
-    asc: ApiConstants.ATTENDANCE_STATS_ASC,
-    desc: ApiConstants.ATTENDANCE_STATS_DESC,
+    asc: !subjectId
+      ? ApiConstants.ATTENDANCE_STATS_ASC
+      : ApiConstants.ATTENDANCE_STATS_ASC_SUBJECT,
+    desc: !subjectId
+      ? ApiConstants.ATTENDANCE_STATS_DESC
+      : ApiConstants.ATTENDANCE_STATS_DESC_SUBJECT,
   };
 
   return request
-    .get(URL[sort], { params: { from, till, groupId } })
+    .get(
+      !name
+        ? URL[sort]
+        : !subjectId
+        ? ApiConstants.ATTENDANCE_STATS_NAME
+        : ApiConstants.ATTENDANCE_STATS_NAME_SUBJECT,
+      {
+        params: { from, till, groupId, subjectId },
+      }
+    )
     .then(({ data }) => data);
 };
