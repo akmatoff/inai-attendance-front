@@ -8,5 +8,6 @@ export const ROUTES = {
   SUBJECT: "/dashboard/subject",
   SCHEDULE: "/dashboard/schedule",
   TEACHER_SCHEDULE: "/dashboard/teacher-schedule",
+  TEACHER_SCHEDULE_FOR_WEEK: "/dashboard/teacher-schedule-for-week",
   LOGIN: "/login",
 };

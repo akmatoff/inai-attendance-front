@@ -35,10 +35,14 @@ export const useTeacherClassesForToday = (
   };
 };
 
-export const useTeacherClassesForWeek = (teacherId: number) => {
+export const useTeacherClassesForWeek = (
+  teacherId: number,
+  enabled: boolean = true
+) => {
   const { data, isLoading } = useQuery({
     queryFn: () => getTeacherClassesForWeek(teacherId),
     queryKey: [ApiConstants.TEACHER_CLASSES_WEEK, teacherId],
+    enabled,
   });
 
   return {

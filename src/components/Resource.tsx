@@ -20,7 +20,10 @@ export default function Resource({
       <Card className="px-2">
         <CardBody>
           <div className="flex justify-between items-center">
-            <h1 className="font-semibold">{title}</h1>
+            <div className="flex items-center gap-2">
+              <Icons.LIST className="text-xl" />
+              <h1 className="font-semibold">{title}</h1>
+            </div>
 
             {onButtonClick && (
               <Button

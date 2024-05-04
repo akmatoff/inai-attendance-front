@@ -26,8 +26,6 @@ export default function Sidebar() {
     localStorage.removeItem(StorageKeys.USERNAME);
   };
 
-  console.log(location.pathname);
-
   const isActive = (href: string) => location.pathname === href;
 
   return (

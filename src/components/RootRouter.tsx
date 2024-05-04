@@ -9,6 +9,7 @@ import SchedulePage from "@/pages/schedule/SchedulePage";
 import UsersPage from "@/pages/user/UsersPage";
 import TeacherSchedulePage from "@/pages/teacherSchedule/TeacherSchedulePage";
 import DashboardIndex from "@/pages/DashboardIndex";
+import TeacherScheduleForWeek from "@/pages/teacherSchedule/TearcheScheduleForWeek";
 
 export default function RootRouter() {
   return (
@@ -24,6 +25,10 @@ export default function RootRouter() {
             <Route path="schedule" element={<SchedulePage />} />
             <Route path="user" element={<UsersPage />} />
             <Route path="teacher-schedule" element={<TeacherSchedulePage />} />
+            <Route
+              path="teacher-schedule-for-week"
+              element={<TeacherScheduleForWeek />}
+            />
           </Route>
         </Route>
       </Routes>

@@ -46,10 +46,18 @@ export const resourcesActionSection: IResource[] = [
   },
   {
     key: "schedule-today",
-    label: "Пары",
+    label: "Сегодня",
     description: "Список пар на сегодня",
 
     href: ROUTES.TEACHER_SCHEDULE,
+    icon: <Icons.CALENDAR />,
+  },
+  {
+    key: "schedule-for-week",
+    label: "Неделя",
+    description: "Список пар на неделю",
+
+    href: ROUTES.TEACHER_SCHEDULE_FOR_WEEK,
     icon: <Icons.CALENDAR />,
   },
 ];

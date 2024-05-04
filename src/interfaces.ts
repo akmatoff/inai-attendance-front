@@ -42,6 +42,15 @@ export interface ITeacherClassesForToday {
   classTime: string;
 }
 
+export interface ITeacherClassesForWeek {
+  [day: string]: ITeacherClassesForToday[];
+}
+
+export interface ITeacherClassForWeekMapped {
+  weekDay: string;
+  schedules: ITeacherClassesForToday[];
+}
+
 export interface IUserCreate {
   firstName: string;
   lastName: string;

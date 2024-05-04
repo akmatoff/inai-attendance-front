@@ -1,6 +1,10 @@
 import { ApiConstants } from "@/constants/apiConstants";
 import { request } from "./request";
-import { ITeacher, ITeacherClassesForToday } from "@/interfaces";
+import {
+  ITeacher,
+  ITeacherClassesForToday,
+  ITeacherClassesForWeek,
+} from "@/interfaces";
 
 export const getTeachers = async (): Promise<ITeacher[]> => {
   return request.get(ApiConstants.TEACHERS_LIST).then(({ data }) => data);
@@ -14,7 +18,9 @@ export const getTeacherClassesForToday = async (
     .then(({ data }) => data);
 };
 
-export const getTeacherClassesForWeek = async (teacherId: number) => {
+export const getTeacherClassesForWeek = async (
+  teacherId: number
+): Promise<ITeacherClassesForWeek> => {
   return request
     .get(ApiConstants.TEACHER_CLASSES_WEEK, { params: { teacherId } })
     .then(({ data }) => data);
