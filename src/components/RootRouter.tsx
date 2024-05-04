@@ -11,12 +11,14 @@ import TeacherSchedulePage from "@/pages/teacherSchedule/TeacherSchedulePage";
 import DashboardIndex from "@/pages/DashboardIndex";
 import TeacherScheduleForWeek from "@/pages/teacherSchedule/TearcheScheduleForWeek";
 import AttendancePage from "@/pages/attendance/AttendancePage";
+import Index from "@/pages/Index";
 
 export default function RootRouter() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<RootLayout />}>
+          <Route index element={<Index />} />
           <Route path="login" element={<Login />} />
           <Route path="dashboard" element={<DashboardLayout />}>
             <Route index element={<DashboardIndex />} />
