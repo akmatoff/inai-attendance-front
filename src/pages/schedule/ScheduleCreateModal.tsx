@@ -82,7 +82,7 @@ export default function ScheduleCreateModal({
       );
       return;
     }
-    setClassTimeId(classTimes?.[0].id);
+    setClassTimeId(classTimes?.[0]?.id);
   }, [classTimes, schedule]);
 
   useEffect(() => {
@@ -93,7 +93,7 @@ export default function ScheduleCreateModal({
       return;
     }
 
-    setClassDayId(classDays?.[0].id);
+    setClassDayId(classDays?.[0]?.id);
   }, [classDays, schedule]);
 
   useEffect(() => {
@@ -101,7 +101,7 @@ export default function ScheduleCreateModal({
       setGroupId(schedule.groupId);
       return;
     }
-    setGroupId(groups?.[0].id);
+    setGroupId(groups?.[0]?.id);
   }, [groups, schedule]);
 
   useEffect(() => {
@@ -111,7 +111,7 @@ export default function ScheduleCreateModal({
       );
       return;
     }
-    setTeacherId(teachers?.[0].id);
+    setTeacherId(teachers?.[0]?.id);
   }, [teachers, schedule]);
 
   useEffect(() => {
@@ -121,7 +121,7 @@ export default function ScheduleCreateModal({
       );
       return;
     }
-    setSubjectId(subjects?.[0].id);
+    setSubjectId(subjects?.[0]?.id);
   }, [subjects, schedule]);
 
   return (
