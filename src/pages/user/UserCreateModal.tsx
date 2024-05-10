@@ -124,7 +124,11 @@ export default function UserCreateModal({
 
   useEffect(() => {
     if (groups && !isEdit && !user) {
-      setUserData({ ...userData, groupId: groups[0].id });
+      if (groups[0]?.id) {
+        setUserData({ ...userData, groupId: groups[0].id });
+      } else {
+        setUserData({ ...userData });
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [groups]);
