@@ -120,9 +120,16 @@ function ScheduleRow({
             isOpen={isAttendanceOpen}
             onOpenChange={onAttendanceOpenChange}
           >
-            {!isLoading && (
-              <Listbox items={todayAttendance || []}>
-                {(item) => <ListboxItem key={item}>{item}</ListboxItem>}
+            {!isLoading && todayAttendance && (
+              <Listbox
+                items={todayAttendance || []}
+                emptyContent="Нет присутствующих на паре."
+              >
+                {todayAttendance.map((item) => (
+                  <ListboxItem key={item + Math.random().toString()}>
+                    {item}
+                  </ListboxItem>
+                ))}
               </Listbox>
             )}
             {isLoading && <Spinner />}
